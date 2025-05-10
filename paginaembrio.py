@@ -618,7 +618,7 @@ function onClick(element) {
 </html>
 """
 
-with open("pagina_interactiva.html", "w", encoding="utf-8") as archivo:
+with open("index.html", "w", encoding="utf-8") as archivo:
     archivo.write(html_content)
 
 
