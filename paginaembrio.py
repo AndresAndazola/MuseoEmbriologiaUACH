@@ -45,7 +45,7 @@ figcaption {
 
 .w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
 .w3-half img:hover{opacity:1}
-.w3-sidebar, .w3-top {background-color: #9e3a68;}
+.w3-sidebar, .w3-top {background-color: #dc143c;}
 .w3-sidebar .w3-bar-item, .w3-top .w3-button {color: white;}
 .w3-sidebar a:hover, .w3-bar-item:hover {background-color: #A8D08D;}
 .w3-button, .w3-hover-black:hover {background-color: danger; color: #4a4a4a;}
