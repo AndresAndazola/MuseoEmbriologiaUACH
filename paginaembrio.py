@@ -45,7 +45,7 @@ figcaption {
 
 .w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
 .w3-half img:hover{opacity:1}
-.w3-sidebar, .w3-top {background-color: #dc143c;}
+.w3-sidebar, .w3-top {background-color: danger;}
 .w3-sidebar .w3-bar-item, .w3-top .w3-button {color: white;}
 .w3-sidebar a:hover, .w3-bar-item:hover {background-color: #A8D08D;}
 .w3-button, .w3-hover-black:hover {background-color: danger; color: #4a4a4a;}
@@ -63,7 +63,7 @@ hr {border:5px solid #A8D08D;}
 
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-danger w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
-  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Cerrar</a>
   <div class="w3-container">
     <h3 class="w3-padding-64" style= "color: white"><b>Museo<br>de Embriología</b></h3>
   </div>
@@ -73,6 +73,7 @@ hr {border:5px solid #A8D08D;}
     <a href="#mision" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Misión</a> 
     <a href="#vision" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Visión</a> 
     <a href="#historia" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Historia</a>
+    <a href="#recorrido" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Recorrido Virtual</a> 
     <a href="#informacion" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Información</a> 
     <a href="#contacto" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Contacto</a>
   </div>
@@ -506,6 +507,33 @@ hr {border:5px solid #A8D08D;}
         
     </div>    
 
+<!-- Recorrido Virtual -->
+<div class="w3-container" id="recorrido" style="margin-top:75px">
+  <h1 class="w3-xxxlarge w3-text-blue"><b>Recorrido Virtual.</b></h1>
+  <hr class="hr-warning">
+  <p>Bienvenido a la embrioguía, un lugar donde podrás explorar lo que el Museo de Embriología "Dra. Dora Virginia Chávez Corral" tiene para ofrecer.</p>
+</div>
+
+<div class="w3-row-padding">
+  <div class="w3-half w3-margin-bottom">
+    <ul class="w3-ul w3-light-grey w3-center">
+      <li class="w3-indigo w3-xlarge w3-padding-32">Visitantes</li>
+      <li class="w3-light-grey w3-padding-24">
+        <a href="recorrido-visitas.html" class="w3-button w3-indigo w3-padding-large w3-hover-black">Explorar recorrido visitantes</a>
+      </li>
+    </ul>
+  </div>
+      
+  <div class="w3-half">
+    <ul class="w3-ul w3-light-grey w3-center">
+      <li class="w3-red w3-xlarge w3-padding-32">Estudiantes</li>
+      <li class="w3-light-grey w3-padding-24">
+        <a href="recorrido-estudiantes.html" class="w3-button w3-red w3-padding-large w3-hover-black">Explorar recorrido estudiantes</a>
+      </li>
+    </ul>
+  </div>
+</div>
+ 
   <!-- Informacion -->
       <div class="w3-container" id="informacion" style="margin-top:75px">
       <h1 class="w3-xxxlarge w3-text-blue"><b>Información.</b></h1>
@@ -519,72 +547,18 @@ hr {border:5px solid #A8D08D;}
       <img src="imagenes/croquis.jpg" alt="Croquis del museo" style="width:70%; margin-top:16px;">
     </div>
 
-  <!-- Packages / Pricing Tables -->
-  <div class="w3-container" id="packages" style="margin-top:75px">
-    <h1 class="w3-xxxlarge w3-text-blue"><b>Packages.</b></h1>
-    <hr class="hr-warning">
-    <p>Some text our prices. Lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure</p>
-  </div>
-
-  <div class="w3-row-padding">
-    <div class="w3-half w3-margin-bottom">
-      <ul class="w3-ul w3-light-grey w3-center">
-        <li class="w3-dark-grey w3-xlarge w3-padding-32">Basic</li>
-        <li class="w3-padding-16">Floorplanning</li>
-        <li class="w3-padding-16">10 hours support</li>
-        <li class="w3-padding-16">Photography</li>
-        <li class="w3-padding-16">20% furniture discount</li>
-        <li class="w3-padding-16">Good deals</li>
-        <li class="w3-padding-16">
-          <h2>$ 199</h2>
-          <span class="w3-opacity">per room</span>
-        </li>
-        <li class="w3-light-grey w3-padding-24">
-          <button class="w3-button w3-white w3-padding-large w3-hover-black">Sign Up</button>
-        </li>
-      </ul>
-    </div>
-        
-    <div class="w3-half">
-      <ul class="w3-ul w3-light-grey w3-center">
-        <li class="w3-pink w3-xlarge w3-padding-32">Pro</li>
-        <li class="w3-padding-16">Floorplanning</li>
-        <li class="w3-padding-16">50 hours support</li>
-        <li class="w3-padding-16">Photography</li>
-        <li class="w3-padding-16">50% furniture discount</li>
-        <li class="w3-padding-16">GREAT deals</li>
-        <li class="w3-padding-16">
-          <h2>$ 249</h2>
-          <span class="w3-opacity">per room</span>
-        </li>
-        <li class="w3-light-grey w3-padding-24">
-          <button class="w3-button w3-red w3-padding-large w3-hover-black">Sign Up</button>
-        </li>
-      </ul>
-    </div>
-  </div>
-  
+ 
   <!-- Contact -->
-  <div class="w3-container" id="contact" style="margin-top:75px">
-    <h1 class="w3-xxxlarge w3-text-blue"><b>Contacto.</b></h1>
-    <hr class="hr-warning">
-    <p>Do you want us to style your home? Fill out the form and fill me in with the details :) We love meeting new people!</p>
-    <form action="/action_page.php" target="_blank">
-      <div class="w3-section">
-        <label>Name</label>
-        <input class="w3-input w3-border" type="text" name="Nombre" required>
-      </div>
-      <div class="w3-section">
-        <label>Email</label>
-        <input class="w3-input w3-border" type="text" name="Email" required>
-      </div>
-      <div class="w3-section">
-        <label>Message</label>
-        <input class="w3-input w3-border" type="text" name="Mensaje" required>
-      </div>
-      <button type="submit" class="w3-button w3-block w3-padding-large w3-pink w3-margin-bottom">Enviar</button>
-    </form>  
-  </div>
+     <div class="w3-container" id="contacto" style="margin-top:75px">
+      <h1 class="w3-xxxlarge w3-text-blue"><b>Contacto.</b></h1>
+      <hr style="width:50px;border:5px solid yellow" class="w3-round">
+      <p>Si deseas más información sobre el Museo de Embriología “Dra. Dora Virginia Chávez Corral”, puedes visitar nuestras instalaciones en la Facultad de Medicina y Ciencias Biomédicas de la UACH, Campus II.</p>
+      <p>También puedes contactarnos a través de la Secretaría de Extensión y Difusión: </p>
+      <p><b>Tels.(614) 439-18-24, 414-49-73, 414-21-45 y 414-52-97</p>
+        Chihuahua, Chih, México.
+        </b></p>
+      <p>Estamos para servirte y atender todas tus dudas.</p>
+    </div>
 
 <!-- End page content -->
   
