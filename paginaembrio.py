@@ -81,7 +81,7 @@ hr {border:5px solid #A8D08D;}
 
 <!-- Top menu on small screens -->
 <header class="w3-container w3-top w3-hide-large w3-danger w3-xlarge w3-padding">
-  <a href="javascript:void(0)" class="w3-button w3-pink w3-margin-right" onclick="w3_open()">☰</a>
+  <a href="javascript:void(0)" class="w3-button w3-danger w3-margin-right" onclick="w3_open()">☰</a>
   <span>Museo de Embriología</span>
 </header>
 
