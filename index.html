@@ -62,7 +62,6 @@ hr {border:5px solid #A8D08D;}
   </div>
   <div class="w3-bar-block">
     <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Inicio</a> 
-    <a href="#contenido" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Contenido</a> 
     <a href="#mision" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Misión</a> 
     <a href="#vision" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Visión</a> 
     <a href="#historia" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Historia</a>
@@ -84,11 +83,17 @@ hr {border:5px solid #A8D08D;}
 <!-- !PAGE CONTENT! -->
 <div class="w3-main" style="margin-left:340px;margin-right:40px">
 
-  <!-- Header -->
-  <div class="w3-container" style="margin-top:80px" id="contenido">
-    <h1 class="w3-jumbo w3-text-indigo"><b>Museo de Embriología
-“Dra. Dora Virginia Chávez Corral”
-</b></h1>
+ <!-- Header -->
+<div class="w3-container" style="margin-top:80px" id="contenido">
+  <h1 class="w3-jumbo w3-text-indigo" style="display: flex; align-items: center; gap: 15px;">
+  <img src="imagenes/isotipo.png" alt="isotipo" style="height: 175px;">
+    <span style="line-height: 1.2; font-size: 55px;">
+      <b>Museo de Embriología</b><br>
+  <b>“Dra. Dora Virginia Chávez Corral”</b>
+    </span>
+    
+  </h1>
+</div>
     
   <!-- Mision -->
   <div class="w3-container" id="mision" style="margin-top:75px">
@@ -486,7 +491,7 @@ hr {border:5px solid #A8D08D;}
        <li class="w3-indigo w3-xlarge w3-padding-32">Para visitas</li>
        <li class="w3-light-grey w3-padding-24">
          <!-- Cambiar Sign Up a un enlace -->
-         <a href="index_cuento.html" class="w3-button w3-white w3-padding-large w3-hover-black">Entrar</a>
+         <a href="index_cuento.html" class="w3-button w3-indigo w3-padding-large w3-hover-black">Entrar</a>
        </li>
      </ul>
    </div>
@@ -496,7 +501,7 @@ hr {border:5px solid #A8D08D;}
        <li class="w3-danger w3-xlarge w3-padding-32">Para estudiantes</li>
        <li class="w3-light-grey w3-padding-24">
          <!-- Puedes enlazar a otra futura página para estudiantes -->
-         <a href="index_estudiantes.html" class="w3-button w3-red w3-padding-large w3-hover-black">Entrar</a>
+         <a href="index_estudiantes.html" class="w3-button w3-danger w3-padding-large w3-hover-black">Entrar</a>
        </li>
      </ul>
    </div>
@@ -513,6 +518,19 @@ hr {border:5px solid #A8D08D;}
       </p>
     
       <img src="imagenes/croquis.jpg" alt="Croquis del museo" style="width:70%; margin-top:16px;">
+      </p>
+      
+      <div class="w3-row-padding">
+         <div class="w3-half w3-margin-bottom w3-center" style="float: none; margin: 50px auto 0;">
+           <ul class="w3-ul w3-light-grey w3-center">
+             <li class="w3-indigo w3-xlarge w3-padding-32">Agenda tu cita.</li>
+             <li class="w3-light-grey w3-padding-24">
+               <!-- Cambiar Sign Up a un enlace -->
+               <a href="https://embryopass.onrender.com" class="w3-button w3-indigo w3-padding-large w3-hover-black">Entrar</a>
+             </li>
+           </ul>
+         </div>
+     
     </div>
 
  
