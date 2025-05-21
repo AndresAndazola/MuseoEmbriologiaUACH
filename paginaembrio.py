@@ -497,7 +497,6 @@ hr {border:5px solid #A8D08D;}
      <ul class="w3-ul w3-light-grey w3-center">
        <li class="w3-indigo w3-xlarge w3-padding-32">Para visitas</li>
        <li class="w3-light-grey w3-padding-24">
-         <!-- Cambiar Sign Up a un enlace -->
          <a href="index_cuento.html" class="w3-button w3-indigo w3-padding-large w3-hover-black">Entrar</a>
        </li>
      </ul>
@@ -505,9 +504,8 @@ hr {border:5px solid #A8D08D;}
        
    <div class="w3-half">
      <ul class="w3-ul w3-light-grey w3-center">
-       <li class="w3-danger w3-xlarge w3-padding-32">Para estudiantes</li>
+       <li class="w3-danger w3-xlarge w3-padding-32">Para estudiantes del área de la salud</li>
        <li class="w3-light-grey w3-padding-24">
-         <!-- Puedes enlazar a otra futura página para estudiantes -->
          <a href="index_estudiantes.html" class="w3-button w3-danger w3-padding-large w3-hover-black">Entrar</a>
        </li>
      </ul>
