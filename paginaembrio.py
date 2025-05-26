@@ -65,7 +65,7 @@ hr {border:5px solid #A8D08D;}
 <nav class="w3-sidebar w3-danger w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
   <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Cerrar</a>
   <div class="w3-container">
-    <h3 class="w3-padding-64" style= "color: white"><b>Museo<br>de Embriología</b></h3>
+    <h3 class="w3-padding-64" style= "color: white; margin: 0;"><b>Museo<br>de Embriología</b></h3>
   </div>
   <div class="w3-bar-block">
     <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Inicio</a> 
@@ -80,7 +80,9 @@ hr {border:5px solid #A8D08D;}
 
 <!-- Top menu on small screens -->
 <header class="w3-container w3-top w3-hide-large w3-danger w3-xlarge w3-padding">
-  <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">☰</a>
+  <a href="javascript:void(0)" onclick="w3_open()" 
+   class="w3-button w3-red w3-margin-right" 
+   style="border-radius: 4px; padding: 8px 16px;">☰</a>
   <span>Museo de Embriología</span>
 </header>
 

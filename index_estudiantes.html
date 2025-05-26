@@ -8,57 +8,6 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
     <style>
-        .sidebar {
-    position: fixed;
-    top: 80px;
-    left: 0;
-    width: 220px;
-    background-color: #ffffffee;
-    border-right: 1px solid #ccc;
-    padding: 20px 15px;
-    height: 100%;
-    overflow-y: auto;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    z-index: 1000;
-}
-
-.sidebar h3 {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-    color: #157753;
-    text-align: left;
-}
-
-.sidebar ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.sidebar ul li {
-    margin-bottom: 10px;
-}
-
-.sidebar ul li a {
-    text-decoration: none;
-    color: #333;
-    font-size: 0.95em;
-    display: block;
-    transition: color 0.3s;
-}
-
-.sidebar ul li a:hover {
-    color: #b4004e;
-}
-
-@media (max-width: 768px) {
-    .sidebar {
-        display: none;
-    }
-    .container {
-        margin-left: 0 !important;
-    }
-}
-
         body, h1, h2, h3, h4 {
             font-family: "Poppins", sans-serif;
             color: #c92525;
@@ -69,10 +18,6 @@
             color: #b4004e;
             text-shadow: 2px 2px #e9d041;
             margin-bottom: 20px;
-        
-            font-family: "Poppins", sans-serif;
-            color: #ffffff;
-            text-align: center;
         }
         h4 {
             font-size: 1.2em;
@@ -80,21 +25,15 @@
             color: #2e297b;
             margin-top: 10px;
             margin-bottom: 10px;
-            font-family: "Poppins", sans-serif;
-            text-align: center;
         }
-
         h3 {
             font-size: 1.3em;
             font-weight: 500;
             color: #157753;
             margin-top: 10px;
             margin-bottom: 10px;
-            font-family: "Poppins", sans-serif;
-            text-align: center;
         }
         p {
-            font-family: "Poppins", sans-serif;
             color: #282828;
             text-align: justify;
             line-height: 1.6;
@@ -106,7 +45,6 @@
             font-size: 16px;
             margin: 0;
         }
-
         img {
             max-width: 65%;
             height: auto;
@@ -128,6 +66,42 @@
             max-width: 900px;
             margin: auto;
             padding: 20px;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+        @media (min-width: 992px) {
+            .w3-main {
+                margin-left: 320px;
+                margin-right: 60px;
+            }
+            .container {
+                padding-left: 40px;
+                padding-right: 40px;
+            }
+        }
+        @media (min-width: 1400px) {
+            .container {
+                max-width: 1000px;
+            }
+        }
+        @media (max-width: 768px) {
+            .w3-sidebar {
+                display: none;
+            }
+            .container {
+                margin-left: 0 !important;
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+            .w3-main {
+                margin-top: 70px;
+            }
+        }
+        @media (max-width: 600px) {
+            body {
+                font-size: 15px;
+                line-height: 1.7;
+            }
         }
         .animate {
             opacity: 0;
@@ -141,21 +115,51 @@
     </style>
 </head>
 <body>
-    <nav class="sidebar">
-        <h3>Contenido</h3>
-        <ul>
-            <li><a href="#espermatogenesis">Espermatogénesis</a></li>
-            <li><a href="#ovogenesis">Ovogénesis</a></li>
-            <li><a href="#fertilizacion">Fertilización</a></li>
-            <li><a href="#transporte-ovocito">Transporte del ovocito</a></li>
-            <li><a href="#transporte-espermatozoides">Transporte de espermatozoides</a></li>
-            <li><a href="#detalle-fertilizacion">Llegada a la fertilización</a></li>
-        </ul>
-    </nav>
-    
-<div class="container" style="margin-left: 240px;">
-    
-    <h1 class="animate">Guion del museo para estudiantes del área de la salud</h1>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-indigo w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size: 22px">Cerrar</a>
+  <div class="w3-container" style="text-align: right;">
+    <h3 class="w3-padding-64" style="color: white; margin: 0; text-align: left;"><b>Museo<br>de Embriología</b></h3>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#espermatogenesis" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" style="font-size: 17px; text-align: left; padding-left: 16px;">Espermatogénesis</a>
+    <a href="#ovogenesis" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" style="font-size: 17px; text-align: left; padding-left: 16px;">Ovogénesis</a>
+    <a href="#fertilizacion" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" style="font-size: 17px; text-align: left; padding-left: 16px;">Fertilización</a>
+    <a href="#transporte-ovocito" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" style="font-size: 17px; text-align: left; padding-left: 16px;">Transporte del ovocito</a>
+    <a href="#transporte-espermatozoides" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" style="font-size: 17px; text-align: left; padding-left: 16px;">Transporte de espermatozoides</a>
+    <a href="#detalle-fertilizacion" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white" style="font-size: 17px; text-align: left; padding-left: 16px;">Llegada a la fertilización</a>
+    <a href="index.html" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white"
+       style="font-size: 17px; text-align: left; padding-left: 16px; margin-top: 50px;">Volver al inicio</a> 
+  </div>
+</nav>
+
+<!-- Menu para pantallas pequeñas (celulares) -->
+<header class="w3-container w3-top w3-hide-large w3-indigo w3-xlarge w3-padding" style="display: flex; align-items: center;">
+  <a href="javascript:void(0)" onclick="w3_open()" 
+     class="w3-button" 
+     style="background-color: #4b0082; color: white; padding: 8px 16px; border-radius: 4px; margin-right: 16px;">☰</a>
+  <span style="color: white; font-size: 20px; text-align: left;">Museo de Embriología</span>
+</header>
+
+<!-- Overlay -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="cerrar menú" id="myOverlay"></div>
+
+<script>
+  // Script para abrir y cerrar el menú lateral
+  function w3_open() {
+    document.getElementById("mySidebar").style.display = "block";
+    document.getElementById("myOverlay").style.display = "block";
+  }
+
+  function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
+  }
+</script>
+
+<div class="w3-main">
+<h1 class="animate">Guion del museo para estudiantes del área de la salud</h1>
 
     <h4 class="animate">Jorge Eduardo Rivera Parra <br> María Fernanda Maldonado Gurrola</h4>
     <h2 id="espermatogenesis" class="animate">Espermatogénesis</h2>
