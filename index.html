@@ -1,578 +1,1332 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <title>Museo de Embriología UACH</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif; color: #4a4a4a;}
-body {font-size:16px; background-color: #F5F5DC;}
-p { text-align: justify;
-   line-height: 1.6;
-   }
-img {
-     display: block;
-     margin-left: auto;
-     margin-right: auto;
-      }
-figure {
-  margin-top: 20px;
+
+/* VARIABLES */
+:root {
+  --red:       #c0392b;
+  --red-lt:    #e74c3c;
+  --red-pale:  #fdf1f0;    /* fondo secciones rojo */
+  --blue:      #1a5276;
+  --blue-md:   #2471a3;
+  --blue-lt:   #d6eaf8;    /* fondo secciones azul */
+  --yellow:    #d4a017;
+  --yellow-lt: #fef9e7;    /* fondo secciones amarillo */
+  --white:     #fdfcfa;    /* blanco roto — ya no es #ffffff puro */
+  --off-white: #f5f2ed;    /* crema para alternar */
+  --text:      #1c1c1c;
+  --muted:     #6b6560;
+  --border:    rgba(0,0,0,0.08);
 }
 
-figcaption {
-  text-align: center;
-  font-size: 0.85em;
-  font-style: italic;
-  margin-top: 8px;
-  color: #555;
+/* ══════════════════════════════════════════
+   BASE
+══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: var(--text);
+  background: var(--off-white);
+  overflow-x: hidden;
 }
 
-.hr-warning {
-  width: 50px;
-  border: 5px solid #ffeb3b;
+/* ══════════════════════════════════════════
+   BARRA DE PROGRESO
+══════════════════════════════════════════ */
+#progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--red), var(--yellow), var(--blue));
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 999;
+  transition: transform 0.1s linear;
+}
+
+/* ══════════════════════════════════════════
+   NAVBAR — visible solo en escritorio
+══════════════════════════════════════════ */
+#navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 64px;
+  background: var(--blue);
+  border-bottom: 3px solid var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+#navbar .brand {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 1rem;
+  color: var(--white);
+  font-weight: 700;
+  line-height: 1.3;
+}
+#navbar .brand span {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: var(--blue-lt);
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+#navbar nav { display: flex; gap: 4px; }
+
+#navbar nav a {
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--off-white);
+  padding: 6px 12px;
   border-radius: 5px;
+  transition: all 0.2s;
+}
+#navbar nav a:hover  { color: var(--blue); background: var(--blue-lt); }
+#navbar nav a.active { color: var(--white); background: var(--blue); }
+
+/* Botón hamburguesa — oculto en escritorio, visible en móvil */
+#menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  padding: 6px;
+}
+#menu-toggle span {
+  display: block;
+  width: 24px; height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: all 0.3s;
 }
 
-.w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
-.w3-half img:hover{opacity:1}
-.w3-sidebar, .w3-top {background-color: danger;}
-.w3-sidebar .w3-bar-item, .w3-top .w3-button {color: white;}
-.w3-sidebar a:hover, .w3-bar-item:hover {background-color: #A8D08D;}
-.w3-button, .w3-hover-black:hover {background-color: danger; color: #4a4a4a;}
-.w3-jumbo, .w3-xxxlarge {color: #B47C52;}
-hr {border:5px solid #A8D08D;}
-.w3-modal-content {background-color: #9e3a68;}
-.w3-container {color: #4a4a4a;}
-.w3-row-padding .w3-col img {border-radius: 10px;}
-.w3-light-grey {background-color: #F5F5DC;}
-.w3-dark-grey {background-color: #B47C52;}
-.w3-danger {background-color: #9e3a68; color: white;}
+/* ══════════════════════════════════════════
+   SIDEBAR — visible solo en móvil
+══════════════════════════════════════════ */
+#sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: 280px;
+  height: 100vh;
+  background: var(--blue);
+  padding: 40px 0 28px;
+  z-index: 200;
+  transform: translateX(-100%);
+  transition: transform 0.4s cubic-bezier(0.77, 0, 0.18, 1);
+  display: flex;
+  flex-direction: column;
+}
+#sidebar.open { transform: translateX(0); }
+
+#sidebar .sb-brand {
+  padding: 0 28px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+#sidebar .sb-brand h2 {
+  font-family: 'Libre Baskerville', serif;
+  color: #ffffff;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+#sidebar .sb-brand span {
+  display: block;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+
+#sidebar nav { flex: 1; padding: 20px 0; }
+#sidebar nav a {
+  display: flex;
+  align-items: center;
+  padding: 11px 28px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 0.9rem;
+  border-left: 3px solid transparent;
+  transition: all 0.2s;
+}
+#sidebar nav a:hover,
+#sidebar nav a.active {
+  color: #ffffff;
+  background: rgba(255,255,255,0.08);
+  border-left-color: var(--yellow);
+}
+
+#overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 150;
+  backdrop-filter: blur(2px);
+}
+#overlay.show { display: block; }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 900px) {
+  #navbar nav    { display: none; }   /* oculta links del navbar */
+  #menu-toggle   { display: flex; }   /* muestra botón hamburguesa */
+  #main          { padding-top: 64px; }
+  #progress      { top: 64px; }       /* debajo del navbar en móvil */
+}
+@media (min-width: 901px) {
+  #sidebar       { display: none !important; } /* nunca visible en escritorio */
+  #main          { padding-top: 80px; }
+}
+@media (max-width: 720px) {
+  .section       { padding: 52px 22px; }
+  #hero          { padding: 60px 22px; }
+  .info-grid,
+  .contact-box   { grid-template-columns: 1fr; }
+  .tl-item       { grid-template-columns: 60px 1fr; }
+}
+
+/* ══════════════════════════════════════════
+   HERO
+══════════════════════════════════════════ */
+#hero {
+  background:
+    linear-gradient(135deg,
+      rgba(26, 82, 118, 0.92)  0%,
+      rgba(36, 113, 163, 0.85) 60%,
+      rgba(26, 58, 92, 0.90)   100%
+    ),
+    url('imagenes/facultad.jpg') center center / cover no-repeat;
+  padding: 80px 60px 70px;
+  position: relative;
+  overflow: hidden;
+}
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 80% 50%, rgba(212,160,23,0.15) 0%, transparent 60%),
+    radial-gradient(circle at 20% 80%, rgba(192,57,43,0.10) 0%, transparent 50%);
+}
+
+#hero .hero-tag {
+  position: relative;
+  display: inline-block;
+  background: var(--yellow);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 3px;
+  margin-bottom: 24px;
+}
+#hero h1 {
+  position: relative;
+  font-family: 'Libre Baskerville', serif;
+  color: #fff;
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  line-height: 1.2;
+  margin-bottom: 8px;
+  max-width: 700px;
+}
+#hero h1 em { color: var(--yellow); font-style: italic; }
+#hero .hero-sub {
+  position: relative;
+  color: rgba(255,255,255,0.6);
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  margin-bottom: 48px;
+}
+#hero .hero-stats {
+  position: relative;
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+#hero .stat .num {
+  display: block;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 2rem;
+  color: var(--yellow);
+  line-height: 1;
+}
+#hero .stat .lbl {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+
+/* ══════════════════════════════════════════
+   SECCIONES
+══════════════════════════════════════════ */
+.section {
+  padding: 72px 60px;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.section.visible { opacity: 1; transform: translateY(0); }
+
+/* Fondo individual por sección */
+#mision      { background: var(--red-pale); }
+#vision      { background: var(--blue-lt);  }
+#historia    { background: var(--off-white); }
+#recorrido   { background: var(--yellow-lt); }
+#informacion { background: var(--blue-lt);  }
+#contacto    { background: var(--red-pale); }
+
+.section h2 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+/* Divisor tricolor */
+.section-divider { display: flex; gap: 4px; margin-bottom: 28px; }
+.section-divider span { height: 4px; border-radius: 2px; }
+.section-divider span:nth-child(1) { background: var(--red);    width: 28px; }
+.section-divider span:nth-child(2) { background: var(--yellow); width: 28px; }
+.section-divider span:nth-child(3) { background: var(--blue);   width: 28px; }
+
+.section p {
+  line-height: 1.8;
+  color: #3a3530;
+  max-width: 780px;
+  margin-bottom: 16px;
+  font-size: 0.97rem;
+}
+/* ══════════════════════════════════════════
+   TIMELINE INTERACTIVO
+══════════════════════════════════════════ */
+.timeline { margin-top: 40px; }
+
+.tl-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0 20px;
+  position: relative;
+  margin-bottom: 0;
+}
+
+/* Línea vertical tricolor */
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: 38px; top: 44px; bottom: -1px;
+  width: 2px;
+  background: linear-gradient(to bottom,
+    var(--red) 0%, var(--yellow) 50%, var(--blue) 100%);
+}
+.tl-item:last-child::before { display: none; }
+
+/* Columna del año */
+.tl-year { padding-top: 12px; text-align: right; }
+
+.tl-year-badge {
+  display: inline-block;
+  background: var(--blue);
+  color: #fff;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.78rem;
+  padding: 4px 8px;
+  border-radius: 3px;
+  position: relative;
+  z-index: 1;
+  transition: background 0.2s;
+}
+.tl-item.open .tl-year-badge { background: var(--red); }
+
+.tl-year-badge::after {
+  content: '';
+  position: absolute;
+  right: -19px; top: 50%;
+  transform: translateY(-50%);
+  width: 10px; height: 10px;
+  background: var(--yellow);
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  transition: transform 0.2s;
+}
+.tl-item.open .tl-year-badge::after {
+  transform: translateY(-50%) scale(1.4);
+}
+
+/* Cuerpo clickeable */
+.tl-body {
+  padding: 10px 0 32px 14px;
+}
+
+.tl-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: background 0.2s;
+  margin-left: -14px;
+  user-select: none;
+}
+.tl-header:hover { background: rgba(0,0,0,0.04); }
+
+.tl-header-left h3 {
+  font-family: 'Libre Baskerville', serif;
+  color: var(--red);
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+.tl-header-left .tl-summary {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.5;
+  max-width: 600px;
+}
+
+/* Ícono de expandir */
+.tl-toggle {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--blue-lt);
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-left: 16px;
+  transition: all 0.3s;
+}
+.tl-item.open .tl-toggle {
+  background: var(--red);
+  color: #fff;
+  transform: rotate(45deg);
+}
+
+/* Contenido expandible */
+.tl-content {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.4s ease,
+              padding 0.3s ease;
+  opacity: 0;
+  padding: 0 14px;
+}
+.tl-item.open .tl-content {
+  max-height: 2000px; /* suficientemente grande para cualquier contenido */
+  opacity: 1;
+  padding: 16px 14px 0;
+}
+
+.tl-content p {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 680px;
+  margin-bottom: 12px;
+}
+.tl-content figure { margin-top: 14px; margin-bottom: 16px; }
+.tl-content img {
+  max-width: 100%;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+}
+.tl-content figcaption {
+  font-size: 0.76rem;
+  font-style: italic;
+  color: var(--muted);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .tl-item { grid-template-columns: 60px 1fr; }
+  .tl-header-left .tl-summary { display: none; } /* en móvil solo el título */
+}
+
+/* ══════════════════════════════════════════
+   MAPA DE CONTENIDOS — GRID
+══════════════════════════════════════════ */
+.content-map {
+  margin: 36px 0 40px;
+}
+
+.content-map-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.content-map-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.map-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 14px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.map-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.09);
+}
+
+/* Franja de color en la parte superior de cada tarjeta */
+.map-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+}
+
+/* Los tres primeros (espermatogénesis, ovogénesis, fertilización) en rojo */
+.map-card.type-gameto::before  { background: var(--red); }
+
+/* Fertilización en amarillo */
+.map-card.type-fertil::before  { background: var(--yellow); }
+
+/* Las semanas en azul */
+.map-card.type-semana::before  { background: var(--blue); }
+
+.map-card-icon {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.map-card-number {
+  position: absolute;
+  top: 10px; right: 10px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--muted);
+  opacity: 0.5;
+  font-family: 'Libre Baskerville', serif;
+}
+
+.map-card h4 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 0.88rem;
+  color: var(--text);
+  margin-bottom: 5px;
+  line-height: 1.3;
+}
+
+.map-card p {
+  font-size: 0.72rem;
+  color: var(--muted);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Etiqueta de categoría */
+.map-card-tag {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+.map-card.type-gameto .map-card-tag  {
+  background: var(--red-pale);
+  color: var(--red);
+}
+.map-card.type-fertil .map-card-tag  {
+  background: var(--yellow-lt);
+  color: var(--yellow);
+}
+.map-card.type-semana .map-card-tag  {
+  background: var(--blue-lt);
+  color: var(--blue);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .content-map-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .content-map-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .map-card { padding: 14px 10px; }
+}
+
+/* ══════════════════════════════════════════
+   CARDS
+══════════════════════════════════════════ */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--white);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(26,82,118,0.12);
+}
+.card-stripe {
+  height: 5px;
+  background: linear-gradient(90deg, var(--red) 33%, var(--yellow) 33% 66%, var(--blue) 66%);
+}
+.card-header { padding: 24px 28px 16px; }
+.card-icon   { font-size: 1.8rem; margin-bottom: 12px; display: block; }
+.card h3 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 1.05rem;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+.card-footer { padding: 16px 28px; border-top: 1px solid var(--border); }
+
+/* ══════════════════════════════════════════
+   BOTONES
+══════════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+.btn-red    { background: var(--red);    color: #fff; }
+.btn-red:hover    { background: var(--red-lt); }
+.btn-blue   { background: var(--blue);   color: #fff; }
+.btn-blue:hover   { background: var(--blue-md); }
+.btn-yellow { background: var(--yellow); color: #fff; }
+.btn-yellow:hover { filter: brightness(1.1); }
+
+/* ══════════════════════════════════════════
+   INFO GRID
+══════════════════════════════════════════ */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 32px;
+  align-items: start;
+}
+.info-grid img {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.info-detail-item {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+.info-detail-item .icon {
+  width: 36px; height: 36px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.info-detail-item:nth-child(1) .icon { background: var(--red-pale);  color: var(--red); }
+.info-detail-item:nth-child(2) .icon { background: var(--yellow-lt); color: var(--yellow); }
+.info-detail-item:nth-child(3) .icon { background: var(--blue-lt);   color: var(--blue); }
+
+.info-detail-item .text strong {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--blue);
+  margin-bottom: 3px;
+}
+.info-detail-item .text span {
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.55;
+}
+.cita-banner {
+  background: linear-gradient(135deg, var(--blue), var(--blue-md));
+  border-radius: 10px;
+  padding: 24px 28px;
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.cita-banner strong { display: block; color: #fff; font-size: 1rem; margin-bottom: 4px; }
+.cita-banner p      { color: rgba(255,255,255,0.75); font-size: 0.85rem; margin: 0; }
+
+/* ══════════════════════════════════════════
+   CONTACTO
+══════════════════════════════════════════ */
+.contact-box {
+  background: var(--blue);
+  border-radius: 12px;
+  padding: 40px 44px;
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.contact-box h3 {
+  font-family: 'Libre Baskerville', serif;
+  color: #fff;
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--yellow);
+  display: inline-block;
+}
+.contact-info-item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+  color: rgba(255,255,255,0.75);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+.contact-info-item .ci-icon { color: var(--yellow); flex-shrink: 0; margin-top: 2px; }
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+footer {
+  background: var(--text);
+  color: rgba(255,255,255,0.35);
+  font-size: 0.72rem;
+  text-align: center;
+  padding: 20px 40px;
+  letter-spacing: 0.04em;
+}
+footer a { color: var(--yellow); text-decoration: none; }
+
 </style>
 </head>
 <body>
 
-<!-- Sidebar/menu -->
-<nav class="w3-sidebar w3-danger w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
-  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Cerrar</a>
-  <div class="w3-container">
-    <h3 class="w3-padding-64" style= "color: white; margin: 0;"><b>Museo<br>de Embriología</b></h3>
-  </div>
-  <div class="w3-bar-block">
-    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Inicio</a> 
-    <a href="#mision" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Misión</a> 
-    <a href="#vision" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Visión</a> 
-    <a href="#historia" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Historia</a>
-    <a href="#recorrido" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Recorrido Virtual</a> 
-    <a href="#informacion" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Información</a> 
-    <a href="#contacto" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Contacto</a>
-  </div>
-</nav>
+<!-- Barra de progreso -->
+<div id="progress"></div>
 
-<!-- Top menu on small screens -->
-<header class="w3-container w3-top w3-hide-large w3-danger w3-xlarge w3-padding">
-  <a href="javascript:void(0)" onclick="w3_open()" 
-   class="w3-button w3-red w3-margin-right" 
-   style="border-radius: 4px; padding: 8px 16px;">☰</a>
-  <span>Museo de Embriología</span>
+<!-- ══ NAVBAR (escritorio) ══════════════════════════════════════ -->
+<header id="navbar">
+  <div class="brand">
+    Museo de Embriología
+    <span>UACH · Facultad de Medicina y Ciencias Biomédicas</span>
+  </div>
+  <nav id="nav-links">
+    <a href="#inicio">Inicio</a>
+    <a href="#mision">Misión</a>
+    <a href="#vision">Visión</a>
+    <a href="#historia">Historia</a>
+    <a href="#recorrido">Recorrido</a>
+    <a href="#informacion">Información</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <button id="menu-toggle" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
 </header>
 
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
-<!-- !PAGE CONTENT! -->
-<div class="w3-main" style="margin-left:340px;margin-right:40px">
-
- <!-- Header -->
-<div class="w3-container" style="margin-top:80px" id="contenido">
-  <h1 class="w3-jumbo w3-text-indigo" style="display: flex; align-items: center; gap: 15px;">
-  <img src="imagenes/isotipo.png" alt="isotipo" style="height: 175px;">
-    <span style="line-height: 1.2; font-size: 55px;">
-      <b>Museo de Embriología</b><br>
-  <b>“Dra. Dora Virginia Chávez Corral”</b>
-    </span>
-    
-  </h1>
-</div>
-    
-  <!-- Mision -->
-  <div class="w3-container" id="mision" style="margin-top:75px">
-    <h1 class="w3-xxxlarge w3-text-blue"><b>Misión.</b></h1>
-    <hr class="hr-warning">
-    <p>
-            Nuestra misión en el Museo de Embriología “Dra. Dora Virginia Chávez Corral” de
-        la Facultad de Medicina y Ciencias Biomédicas de la UACH es brindar la
-        oportunidad a estudiantes y público en general, de observar a través de
-        interacciones didácticas la secuencia del desarrollo embriológico y fetal, con
-        maquetas en tres dimensiones, muestras biológicas y casos clínicos; para lograr
-        que el conocimiento de Embriología sea significativo, eficiente y actualizado,
-        contribuyendo a la educación de los estudiantes y del público en general. 
-    </p>
+<!-- ══ SIDEBAR (móvil) ═════════════════════════════════════════ -->
+<aside id="sidebar">
+  <div class="sb-brand">
+    <h2>Museo de Embriología</h2>
+    <span>UACH · Facultad de Medicina</span>
   </div>
-  
-  <!-- Vision -->
-  <div class="w3-container" id="vision" style="margin-top:75px">
-    <h1 class="w3-xxxlarge w3-text-blue"><b>Visión.</b></h1>
-    <hr class="hr-warning">
-    <p>
-            El Museo de Embriología “Dra. Dora Virginia Chávez Corral” será una institución
-        pública sólida, dedicada a la difusión del estudio del desarrollo embriológico y fetal.
-        Promoverá el pensamiento crítico en estudiantes y la sociedad, cumpliendo con los
-        indicadores de desempeño correspondientes. Nuestra visión es ser un referente
-        estatal y nacional en educación y divulgación científica sobre el desarrollo
-        embrionario y fetal, inspirando a las personas a comprender, apreciar y dignificar la
-        vida.
+  <nav id="sidebar-links">
+    <a href="#inicio">Inicio</a>
+    <a href="#mision">Misión</a>
+    <a href="#vision">Visión</a>
+    <a href="#historia">Historia</a>
+    <a href="#recorrido">Recorrido Virtual</a>
+    <a href="#informacion">Información</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</aside>
+<div id="overlay"></div>
+
+<!-- ══ CONTENIDO PRINCIPAL ════════════════════════════════════ -->
+<main id="main">
+
+  <!-- Hero -->
+  <section id="inicio">
+    <div id="hero">
+      <div class="hero-tag">Universidad Autónoma de Chihuahua</div>
+      <h1>Museo de Embriología<br><em>"Dra. Dora Virginia Chávez Corral"</em></h1>
+      <p class="hero-sub">Facultad de Medicina y Ciencias Biomédicas · Campus II</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="num" data-target="1993" data-year="true">1993</span>
+          <span class="lbl">Fundado</span>
+        </div>
+        <div class="stat">
+          <span class="num" data-target="30" data-suffix="+">30+</span>
+          <span class="lbl">Años de historia</span>
+        </div>
+        <div class="stat">
+          <span class="num">3D</span>
+          <span class="lbl">Maquetas interactivas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Misión -->
+  <section class="section" id="mision">
+    <p class="section-label">Quiénes somos</p>
+    <h2>Misión</h2>
+    <div class="section-divider"><span></span><span></span><span></span></div>
+    <p>Nuestra misión en el Museo de Embriología "Dra. Dora Virginia Chávez Corral" de la Facultad de Medicina y Ciencias Biomédicas de la UACH es brindar la oportunidad a estudiantes y público en general, de observar a través de interacciones didácticas la secuencia del desarrollo embriológico y fetal, con maquetas en tres dimensiones, muestras biológicas y casos clínicos; para lograr que el conocimiento de Embriología sea significativo, eficiente y actualizado, contribuyendo a la educación de los estudiantes y del público en general.</p>
+  </section>
+
+  <!-- Visión -->
+  <section class="section" id="vision">
+    <p class="section-label">Hacia dónde vamos</p>
+    <h2>Visión</h2>
+    <div class="section-divider"><span></span><span></span><span></span></div>
+    <p>El Museo de Embriología "Dra. Dora Virginia Chávez Corral" será una institución pública sólida, dedicada a la difusión del estudio del desarrollo embriológico y fetal. Promoverá el pensamiento crítico en estudiantes y la sociedad, cumpliendo con los indicadores de desempeño correspondientes. Nuestra visión es ser un referente estatal y nacional en educación y divulgación científica sobre el desarrollo embrionario y fetal, inspirando a las personas a comprender, apreciar y dignificar la vida.</p>
+  </section>
+
+  <!-- Historia -->
+  <section class="section" id="historia">
+    <p class="section-label">Nuestro recorrido</p>
+    <h2>Historia del Museo</h2>
+    <p style="font-style:italic; color:var(--muted); font-size:0.88rem; margin-bottom:0;">
+      Por: Dra. Dora Virginia Chávez Corral
     </p>
-  </div>
-  
-  <!-- Historia del Museo -->
-<div class="w3-container" id="historia" style="margin-top:75px">
-  <h1 class="w3-xxxlarge w3-text-blue"><b>Historia del Museo.</b></h1>
-  <h1 class="w3-xlarge w3-text-blue">Por: Dora Virginia Chávez Corral. </h2>
-  <hr class="hr-warning">
-  
-  
-  <!-- Subsecciónes -->
-  
-  
-        <h2 class="w3-xlarge w3-text-red"> 1993. Primera exposición.</h2>
-        
-        <p> El origen del Museo de Embriología “Dra. Dora Virginia Chávez Corral” se dio en el año 1991, y para narrar su historia me permito hacerlo en primera persona, como fundadora y como docente-investigadora de la Facultad de Medicina y Ciencias Biomédicas (FMyCB) de la Universidad Autónoma de Chihuahua (UACH) desde esos tiempos.</p>
-        <p> En mi idea del ejercicio docente y de investigación en el área de la Embriología nace el llevar a cabo acciones diferentes, que rompieran con la cotidianidad y la enseñanza tradicional en la asignatura de “Embriología”.</p>
-        <p> A principios de los 90 impartía esa asignatura en el primer año de la carrera de Médico Cirujano y Partero en la Facultad de Medicina y también en la Escuela de Odontología (hoy Facultad). En mi ejercicio docente les solicitaba a mis estudiantes como parte de las clases que realizaran unas maquetas tridimensionales con materiales diversos, sobre todo en los temas del programa del curso con mayor dificultad para entender.</p>
-        <p> En ese tiempo el tamaño de las maquetas no era requisito, pues el Laboratorio de Embriología consistía solo en dos espacios grandes ubicados en el tercer piso de la Facultad de Medicina en la avenida Cristóbal Colón y calle Antonio Rosales de la ciudad de Chihuahua.</p>
-        <p> La realización de esas maquetas tridimensionales elaboradas por mis estudiantes resultó en una estrategia “ganar-ganar”: una servidora como docente podía ser más explícita y didáctica, y ellos podían tener una observación directa y detallada del objeto de estudio; de este modo, conjuntamente, lográbamos tener más éxito en el aprovechamiento y comprensión de los temas estudiados. Con el paso del tiempo, se fue juntando un número importante de maquetas y también se fueron mejorando los modelos.</p>
-        
-        <img src="imagenes/Figura_1.jpg" alt="Maqueta tridimensional embriológica" style="width:60%; margin-top:16px;">
-        <figcaption> Explicación del tema genitourinario, Dra. Dora Virginia Chávez Corral y
-        estudiantes, Facultad de Medicina Campus Colón, 1992. </figcaption>
-        
-        <p> Al involucrar a los estudiantes en la elaboración de las maquetas se suscitó
-            una motivación especial en ellos, pues con el tiempo fueron haciendo “más suya”
-            esta asignatura. Un día, al observar todo el material que ya teníamos, les propuse
-            a mis estudiantes realizar una exposición con todas las maquetas de Embriología,
-            y de inmediato aceptaron aportando infinidad de ideas para su exposición. 
-        </p>    
-        <p>
-            Estas acciones generaron una dinámica especial de compañerismo y unidad entre ellos,
-            hasta convertirse en un excelente equipo de trabajo ¡superespecial! Así fue como
-            armamos entre todos la “Primera Exposición de Muestras Embriológicas”, durante
-            la semana del 23 al 30 de abril de 1993. Para ese tiempo, yo ya tenía mi plaza de
-            maestra del Laboratorio de Embriología, teníamos menos de 10 embriones y fetos,
-            la clase era los sábados, así que me daba tiempo de impartirles algunos temas de
-            teoría.
-        </p>
-        
-        <img src="imagenes/Figura_2.jpg" alt="Maqueta tridimensional embriológica" style="width:30%; margin-top:16px;">
-        <figcaption> Tríptico de la Primera Exposición de Muestras Embriológicas, Facultad de
-        Medicina Campus Colón, 1993. </figcaption>
-        
-        <p>
-            En esta primera exposición se organizaron visitas guiadas con horarios
-            establecidos, invitando a escuelas de la ciudad de Chihuahua, Delicias,
-            Cuauhtémoc y Parral. Estas escuelas abarcaban a estudiantes de kínder, primaria,
-            secundaria y preparatoria, de la Escuela Normal del Estado “Profesor Luis Urías
-            Belderrain”, de la Escuela Libre de Psicología y de otras escuelas profesionales de
-            la UACH; también se invitó al público en general. 
-        </p>
-        <p>    
-            Cuando vimos la gran cantidad de visitantes, hubo necesidad organizar a las
-            personas desde la entrada de la misma Facultad de Medicina. Un tema muy
-            importante en la organización de estas visitas guiadas fue su publicidad y
-            propaganda, ¡pero trabajar con jóvenes motivados lo resuelve todo! Teníamos
-            algunos detalles en la infraestructura del área de exposición, pues había áreas de
-            las paredes que estaban descarapeladas, algunas eran grandes y notorias. Fui con
-            el director en turno y lo invité a inaugurar la exposición, le llevé el tríptico de
-            invitación y también le comenté de las paredes descarapeladas. Él tomó la invitación
-            con cierto desdén y me dijo “a quién le puede interesar venir a eso”.
-        </p>
-        <p>  
-            El primer día de exposición fue el lunes 23 de abril de 1993 y, para nuestra
-            sorpresa, en la Plaza Agustín Melgar, que está enfrente de la Facultad de Medicina,
-            había varios camiones estacionados repletos de jóvenes. También se encontraban
-            reporteros de la prensa local. ¡Todo estaba listo! Solo faltaba el director, quien
-            finalmente no acudió, por lo que la inauguración se llevó a cabo sin él. Se tomaron
-            muchas fotos del evento, las que posteriormente se publicaron en los periódicos. 
-        </p>
-        <p>       
-            Al día siguiente, fui requerida en la dirección de la Facultad con carácter de urgencia.
-            Me iban a clausurar la exposición. Yo estuve de acuerdo, pero con la condición de
-            que quien despidiera a todos los visitantes debía de ser el director de la Facultad.
-            Al final, se repararon las grandes descarapeladas de las paredes y continuó la
-            exposición según lo planeado. Fue una semana de un trabajo intenso pero muy
-            enriquecedor. En los días posteriores, la prensa siguió difundiendo las actividades,
-            así como la clausura de la exposición de las muestras embriológicas en el Heraldo
-            de Chihuahua con fecha del 4 de mayo de 1993.
-        </p>
-        
-        <img src="imagenes/Figura_3.jpg" alt="Maqueta tridimensional embriológica" style="width:50%; margin-top:16px;">
-        <figcaption> Primera Exposición de Muestras Embriológicas, Dra. Dora Virginia Chávez Corral,
-        estudiante y público en general, Facultad de Medicina Campus Colón, 1993. </figcaption>
-        
-        <p>
-            ¡Claro que quisimos repetir la gran hazaña! Así que organizamos la “Segunda
-            Exposición de Muestras Embriológicas” del 18 al 22 de abril de 1994.
-        </p>
-        
-        <h2 class="w3-xlarge w3-text-red">1994. Segunda exposición.</h2>
-        
-        <p> 
-            En esta exposición se agregó una sección de pinturas cuyo tema estaba relacionado con la
-            embriología, pinturas que los mismos estudiantes realizaron y ¡encontré que
-            nuestros alumnos tienen muchos talentos! Eran pinturas muy emotivas. Ya la prensa
-            sabía de nuestra exposición, así que difundieron la inauguración en el Heraldo de
-            Chihuahua del 19 de abril de 1994. También se publicó en el Diario de Chihuahua
-            del 21 de abril y en el Boletín Informativo de la Escuela de Odontología/UACH
-            MAGADENT, época I, número 2, de mayo de 1994.
-        </p>
-        
-        <h2 class="w3-xlarge w3-text-red">1996. Tercera exposición.</h2>
-        
-        <p>
-            Del 29 de abril al 3 de mayo de 1996 se llevó a cabo la “Tercera Exposición
-            de Muestras Embriológicas”. A la entrada de la exposición colocamos una pintura
-            elaborada por uno de nuestros estudiantes titulada “Estudiante embarazada”, en
-            donde el autor plasmó en la estudiante un rostro triste, mientras el rostro del feto
-            tenía una expresión de felicidad por la esperanza de su nacimiento a la vida. A razón
-            de esta exposición en septiembre de ese mismo año nos invitaron a participar en el
-            programa radiofónico “La Salud y Usted”, con la ponencia “Tercera Exposición de
-            Muestras Embriológicas”.
-        </p>
-        
-        <img src="imagenes/Figura_4.jpg" alt="Maqueta tridimensional embriológica" style="width:30%; margin-top:16px;">
-        <figcaption> Tríptico de la Tercera Exposición de Muestras Embriológicas, Facultad de
-        Medicina Campus Colón, 1996. </figcaption>
-        
-        <p>
-            En esta última exposición hicimos un cambio, pues al terminar la visita se
-            explicaba el tema de la neurulación, por lo que se expusieron fetitos con defectos
-            congénitos del tubo neural (la estructura precursora del sistema nervioso central
-            compuesto por el cerebro y la médula espinal). 
-        </p>
-        <p>
-            Esto consternaba a los visitantes,
-            así que cerramos la exposición con la participación de los estudiantes de
-            Odontología, que finalizaban presentando una enorme mandíbula con todas sus
-            piezas dentales y su respectivo cepillo dental para explicar a los visitantes el
-            correcto cepillado de los dientes. Con esto logramos que todos salieran felices.
-        </p>
-        
-        <img src="imagenes/Figura_5.jpg" style="width:30%; margin-top:16px;">
-        <figcaption> Pintura “Estudiante embarazada” ubicada en la entrada a la Tercera Exposición de
-        Muestras Embriológicas, Facultad de Medicina Campus Colón, 1996. </figcaption>
-        
-        <h2 class="w3-xlarge w3-text-red">2002. Formalización del Museo.</h2>
-        
-        <p>
-            En el año 2002, solicitamos a la dirección de la Facultad de Medicina contar
-            ya con un espacio fijo para la exposición de un Museo de Embriología. Esto le dio
-            formalidad y se contó con un mobiliario especial para colocar las maquetas, las
-            cuales se tuvieron que hacer con medidas más pequeñas que las anteriores. Se
-            instalaron las maquetas en sus respectivos muebles en el vestíbulo del auditorio de
-            la Facultad de Medicina Campus Colón, al igual que algunas piezas anatómicas. La
-            entrada era totalmente libre.
-        </p>
-        
-        <h2 class="w3-xlarge w3-text-red">2006 - 2008. "La embriología en el arte..."</h2>
-        
-        <p>
-            En el año 2006, se publicó una convocatoria para realizar una exposición de
-            pintura a la cual se le tituló “La Embriología en el arte … más allá de lo académico”.
-            En esta exposición se instaló una colección de obras artísticas que ya teníamos,
-            además de nuevas obras que realizaron los alumnos que estaban cursando o
-            habían cursado la asignatura de Embriología. 
-        </p>
-        <p>
-            Esta exposición comprendió trabajos
-            artísticos elaborados desde 1993 a 2006. El 9 de enero de 2006 se llevó a cabo una
-            ceremonia a la cual acudieron todos los autores de las obras ¡fue muy emotivo!
-            Algunas de estas pinturas se exhiben en el Museo de Embriología “Dra. Dora
-            Virginia Chávez Corral”.
-        </p>    
-        <p>
-            Una de esas obras titulada “Inocencia Truncada” dibujada por Ricardo Raynal
-            Prieto, con sus colaboradores Neiba Luján Gamboa y Arnoldo Mendoza, bajo la
-            asesoría de la DC. Dora Virginia Chávez Corral, fue publicada en la Revista Médico
-            Científica de la Facultad de Medicina de la UACH en el año 2007.
-        </p>
-        
-        <img src="imagenes/Figura_6.jpg" style="width:30%; margin-top:16px; ">
-        <figcaption> Publicación de la pintura “Inocencia Truncada” por Ricardo Raynal Prieto, Neiba
-        Luján Gamboa, Arnoldo Mendoza, DC. Dora Virginia Chávez Corral, Revista Médico Científica de la
-        Facultad de Medicina de la UACH, 2007. </figcaption>
-        
-        <p>
-            Algunas piezas del Museo de Embriología también se presentaron en otras
-            sedes como en la exposición de embriología de la VII Semana Nacional de Ciencia
-            y Tecnología de CONACYT, del 26 de octubre del 2000 y del 3 de septiembre del
-            2002. También se puso un módulo de Embriología en ExpoMédica los días 8, 9 y
-            10 de junio del 2007 y el 18, 19 y 20 de abril del 2008, con duración de 50 horas en
-            cada exposición.
-        </p>
-        
-        <h2 class="w3-xlarge w3-text-red">2010. Cambio de sede. </h2>
-        
-        <p>
-            En el año 2010 nos cambiamos a las nuevas instalaciones de la Facultad de
-            Medicina en el Campus II de la UACH en el Periférico de la Juventud y las piezas
-            del Museo se guardaron en el Campus II por varios años.
-        </p>
-        
-        <img src="imagenes/Figura_7.jpg" style="width:60%; margin-top:16px; ">
-        <figcaption> Recorrido por el Museo Actual a alumnos de la Ciudad de Delicias, Chih., alumna
-        de Medicina Vanessa González Medrano y estudiantes de preparatoria, Museo de Embriología “Dra.
-        Dora Virginia Chávez Corral” de la Facultad de Medicina Campus II, 2023. </figcaption>
-        
-        <h2 class="w3-xlarge w3-text-red">2018. Reapertura. </h2>
-        
-        <p>
-            En el año 2018 la Facultad de Medicina y Ciencias Biomédicas recibió una
-            invitación para que se llevara a cabo en nuestras instalaciones la XXIII Reunión
-            Nacional de Morfología, en donde propusieron que esta reunión llevara mi nombre.
-            Así que solicité al entonces director de la Facultad Dr. Luis Carlos Hinojos Gallardo,
-            que nos diera un espacio para instalar de nuevo el museo. Me lo concedieron y
-            buscamos las maquetas que se habían guardado. Del total de maquetas guardadas
-            algunas se perdieron, otras estaban en malas condiciones, por lo cual tuvimos que
-            volver a construir nuevas maquetas.
-        </p>
-        <p>
-            Solicité la ayuda al Dr. Javier Camarillo quien tenía trabajando en su
-            laboratorio a varios estudiantes de la Facultad de Artes, quienes ayudaron a
-            elaborar las maquetas de nuevo. ¡Esto le dio un gran avance al museo con
-            maquetas de gran colorido! Dentro del marco de la XXIII Reunión Nacional de
-            Morfología “Dr. C. Dora Virginia Chávez Corral” del 23 al 27 de septiembre de 2019,
-            se inauguró el renovado Museo de Embriología y ¡para mi sorpresa le pusieron mi
-            nombre!
-        </p>
-        
-        <img src="imagenes/Figura_8.jpg" style="width:30%; margin-top:16px; ">
-        <figcaption> Flyer de la XXIII Reunión Nacional de Morfología, llevada a cabo en la Facultad de
-        Medicina Campus II de la UACH, 2019. </figcaption>
-        
-        <h2 class="w3-xlarge w3-text-red">2020 - Actualidad. </h2>
-        
-        <p>
-            A partir del año 2020 hasta la fecha se integró un valioso equipo de trabajo
-            con los estudiantes para llevar a cabo la revisión de todos los embriones y fetos que
-            tenemos en el Laboratorio de Embriología, ésto con el objetivo de enriquecer la
-            enseñanza y también incorporar algunas de estas piezas al Museo, además se
-            decidió poner los casos clínicos en un apartado especial.
-        </p>
-        <p>
-            Se han clasificado las muestras de embriones y fetos tomando las fotografías
-            respectivas. Se analizaron todas las piezas registrando los cambios morfológicos y
-            se estandarizaron los procedimientos de revisión y registro de estos embriones y
-            fetos para su uso en la docencia y en la investigación. Quienes han trabajado en
-            estas actividades son los alumnos: Anallely Carmona Torres, Javier Alan Chávez
-            Chavarría y Diego Alberto Aguirre Caballero. Los avances de este trabajo se
-            presentaron en el XXIX CONGRESO NACIONAL DE ANATOMÍA en la ciudad de
-            Puebla del 3 al 7 de octubre de 2022.
-        </p>
-        <p>
-            En el año 2023 se formaron otros 4 equipos más de alumnos interesados en
-            trabajar para el Museo, bajo las siguientes actividades y tareas:
-        </p>
-        <p>
-            1. Elaboración del diseño operativo del Museo de Embriología “Dra. Dora
-            Virginia Chávez Corral” que permita a los estudiantes del área de la salud y
-            del público en general comprender el desarrollo embrionario y fetal humano,
-            con la colaboración de los estudiantes: Andrea Peinado Vega, Vanessa
-            González Medrano y Rubén Cervando Murga Bueno.
-        </p>
-        <p>
-            Este equipo de trabajo participó en Tuxtla Gutiérrez, Chis., en 2023 en la XXV
-            Reunión Nacional de Morfología “Mtro. José Ramon Velásquez Moreno” en
-            Trabajos Libres, con la modalidad de Presentación Oral con el trabajo titulado
-            “Diseño operativo del Museo de Embriología Dra. Dora Virginia Chávez
-            Corral de la Universidad Autónoma de Chihuahua”, donde se obtuvo el tercer
-            lugar.
-        </p>
-        
-        <img src="imagenes/Figura_9.jpg" style="width:20%; margin-top:16px; ">
-        <figcaption> Premiación de la presentación oral a integrantes del equipo de trabajo del Diseño
-        Operativo, llevada a cabo en Tuxtla Gutiérrez, Chis., 2023. </figcaption>
-        
-        <p>
-            2. Elaboración de un guion didáctico para el Museo que permita tener una
-            secuencia por temas en la presentación de las piezas y maquetas que
-            conforman el museo, con el propósito de que los estudiantes del área de la
-            salud tengan un mejor conocimiento, se aclaren sus dudas y repasen temas
-            que están estudiando sobre el desarrollo embrionario y fetal humano. En esta
-            actividad están participando los alumnos: María Fernanda Maldonado
-            Gurrola y Jorge Eduardo Rivera Parra
-        </p>
-        <p>
-            3. Elaboración de un guion dirigido a los niños y público en general para la
-            comprensión de los temas del museo. Invité a las Doctoras Gloria Almeida y
-            Luz Helena Sanín para la adaptación del guion en narrativa de cuento, siendo
-            esta versión más corta pues solo abarca los temas de: Gametogénesis,
-            Fecundación y Desarrollo Embrionario y Fetal (1ª a la 12ª semana de
-            gestación). La guía en forma de cuento ya se ha utilizado en varias ocasiones
-            con estudiantes del nivel de secundaria.
-        </p>
-        <p>
-            El 26 de abril se organizó un festejo por el día del niño y se invitaron 50 niños,
-            a los cuales se les narró el cuento completo. Posteriormente tuvimos una
-            invitación especial el 30 de septiembre del 2023 al evento llamado “Expo
-            Corazón”, en donde se adaptó este cuento y se hizo una versión “De puro
-            corazón” que se presentó en el Instituto Tecnológico y de Estudios Superiores
-            de Monterrey (ITESM) Campus Chihuahua. Con estas actividades se ha
-            evaluado el impacto del cuento sobre el desarrollo embrionario y fetal como
-            herramienta didáctica para seguir utilizándolo en el museo. En estas
-            actividades participan las alumnas: Grecia Martínez Romero, Paula Isabel
-            Bermúdez Holguín y Karely Beltrán Andazola. Este año 2024, pretendemos
-            participar con este trabajo en el XXX Congreso Nacional de Anatomía.
-        </p>
-        
-        <img src="imagenes/Figura_10.jpg" style="width:50%; margin-top:16px; ">
-        <figcaption> Participación de integrantes del equipo de Cuento en “Expo Corazón”, llevada a
-        cabo en el Instituto Tecnológico y de Estudios Superiores de Monterrey (ITESM) Campus Chihuahua,
-        2023. </figcaption>
-        
-        <p>
-            4. Redacción y búsqueda de casos clínicos para explicar las piezas con las
-            que cuenta el museo y ayudar a la comprensión y aprendizaje de los temas
-            que se exponen en el museo. Están colaborando en esta actividad los
-            alumnos: Edith Dahena Chávez Alvertiz y Carlos Mauricio Antillón Elías.
-        </p>    
-        <p>
-            Estos alumnos presentaron el trabajo titulado “Trillizos monocigóticosmonocoriónicos-biamnióticos y monoamnióticos para segunda separación
-            gemelar: Reporte de caso”, en el XXXI Congreso Regional de Ginecología y
-            Obstetricia de la Región III, “Salud Femenina sin Fronteras” llevado a cabo
-            en Ciudad Juárez, Chih. del 2 al 4 de mayo 2024.
-        </p>
-        
-        <img src="imagenes/Figura_11.jpg" style="width:30%; margin-top:16px; ">
-        <figcaption> Presentación de cartel por integrantes del equipo de Casos Clínicos en el
-        XXXI Congreso Regional de Ginecología y Obstetricia de la Región III, “Salud Femenina sin
-        Fronteras”, Ciudad Juárez, Chih., 2024. </figcaption>
-        
-        <p>
-            5. También se realizó un concurso para elaborar el Isotipo del Museo, donde
-            tuvimos varios participantes de algunas facultades, resultando ganador un
-            alumno de nuestra Facultad de Medicina y Ciencias Biomédicas.
-        </p>
-        
-        <img src="imagenes/Figura_12.jpg" style="width:50%; margin-top:16px; ">
-        <figcaption> Ceremonia de premiación del Concurso para Diseño de Isotipo del Museo
-        de Embriología “Dra. Dora Virginia Chávez Corral”, Directivos, docentes, estudiantes y
-        participantes, Chihuahua, Chih., 2023. </figcaption>
-        
-        <p>
-            El objetivo que nos proponemos lograr todo el equipo que trabaja en este
-            Museo de Embriología es consolidarlo, integrarlo como fortaleza de la FMyCB y de
-            la propia UACH. Comenzando con su aprobación oficial ante el H. Consejo Técnico
-            de nuestra Facultad, y posteriormente ante el H. Consejo Universitario de la UACH,
-            para que tenga el reconocimiento y respaldo legal y financiero de esta institución
-            educativa. Nos proponemos elevar su calidad y relevancia a nivel local, regional,
-            nacional y por qué no también internacional en cuanto a la enseñanza, el
-            aprendizaje y la investigación en la Embriología.
-        </p>
-        
-        <img src="imagenes/Figura_13.jpg" style="width:40%; margin-top:16px; ">
-        <figcaption> Convivio realizado por el director de la FMyCB Dr. René Núñez Bautista,
-        a alumnos del equipo de trabajo del Laboratorio de Embriología y a la coordinadora del
-        equipo Dra. Dora Virginia Chávez Corral, Chihuahua, Chih., 2023. </figcaption>
-                
-        
-        
-    </div>    
-
-<!-- Recorrido Virtual -->
-<div class="w3-container" id="recorrido" style="margin-top:75px">
-   <h1 class="w3-xxxlarge w3-text-blue"><b>Recorrido Virtual.</b></h1>
-   <hr class="hr-warning">
-   <p>Bienvenido a la embrioguía, un lugar donde podrás explorar lo que el Museo de Embriología "Dra. Dora Virginia Chávez Corral" tiene para ofrecer.</p>
-</div>
-
-<div class="w3-row-padding">
-   <div class="w3-half w3-margin-bottom">
-     <ul class="w3-ul w3-light-grey w3-center">
-       <li class="w3-indigo w3-xlarge w3-padding-32">Para visitas</li>
-       <li class="w3-light-grey w3-padding-24">
-         <a href="index_cuento.html" class="w3-button w3-indigo w3-padding-large w3-hover-black">Entrar</a>
-       </li>
-     </ul>
-   </div>
-       
-   <div class="w3-half">
-     <ul class="w3-ul w3-light-grey w3-center">
-       <li class="w3-danger w3-xlarge w3-padding-32">Para estudiantes del área de la salud</li>
-       <li class="w3-light-grey w3-padding-24">
-         <a href="index_estudiantes.html" class="w3-button w3-danger w3-padding-large w3-hover-black">Entrar</a>
-       </li>
-     </ul>
-   </div>
-</div>
- 
-  <!-- Informacion -->
-      <div class="w3-container" id="informacion" style="margin-top:75px">
-      <h1 class="w3-xxxlarge w3-text-blue"><b>Información.</b></h1>
-      <hr class="hr-warning">
-    
-      <p>
-        A continuación se presenta un croquis con la ubicación del Museo de Embriología dentro de la Facultad de Medicina y Ciencias Biomédicas de la universidad Autónoma de Chihuahua.
-        Este material es útil para visitantes, estudiantes y docentes que deseen conocer la localización precisa del espacio expositivo.
-      </p>
-    
-      <img src="imagenes/croquis.jpg" alt="Croquis del museo" style="width:70%; margin-top:16px;">
-      </p>
-      
-      <div class="w3-row-padding">
-         <div class="w3-half w3-margin-bottom w3-center" style="float: none; margin: 50px auto 0;">
-           <ul class="w3-ul w3-light-grey w3-center">
-             <li class="w3-indigo w3-xlarge w3-padding-32">Agenda tu cita.</li>
-             <li class="w3-light-grey w3-padding-24">
-               <!-- Cambiar Sign Up a un enlace -->
-               <a href="https://embryopass.onrender.com" class="w3-button w3-indigo w3-padding-large w3-hover-black">Entrar</a>
-             </li>
-           </ul>
-         </div>
-     
+    <div class="section-divider" style="margin-top:12px">
+      <span></span><span></span><span></span>
     </div>
 
- 
-  <!-- Contact -->
-     <div class="w3-container" id="contacto" style="margin-top:75px">
-      <h1 class="w3-xxxlarge w3-text-blue"><b>Contacto.</b></h1>
-      <hr style="width:50px;border:5px solid yellow" class="w3-round">
-      <p>Si deseas más información sobre el Museo de Embriología “Dra. Dora Virginia Chávez Corral”, puedes visitar nuestras instalaciones en la Facultad de Medicina y Ciencias Biomédicas de la UACH, Campus II.</p>
-      <p>También puedes contactarnos a través de la Secretaría de Extensión y Difusión: </p>
-      <p><b>Tels.(614) 439-18-24, 414-49-73, 414-21-45 y 414-52-97</p>
-        Chihuahua, Chih, México.
-        </b></p>
-      <p>Estamos para servirte y atender todas tus dudas.</p>
+    <!-- El timeline se genera aquí automáticamente desde JS -->
+    <div class="timeline" id="timeline-container"></div>
+
+  </section>
+
+  <!-- Recorrido -->
+<section class="section" id="recorrido">
+  <p class="section-label">Explora el museo</p>
+  <h2>Recorrido Virtual</h2>
+  <div class="section-divider"><span></span><span></span><span></span></div>
+  <p>Bienvenido a la embrioguía. Antes de entrar, conoce los contenidos que encontrarás en el museo:</p>
+
+  <!-- Mapa de contenidos -->
+  <div class="content-map">
+    <p class="content-map-title">Contenidos del museo — ruta de aprendizaje</p>
+    <div class="content-map-grid">
+
+      <div class="map-card type-gameto">
+        <span class="map-card-number">01</span>
+        <span class="map-card-tag">Gametogénesis</span>
+        <span class="map-card-icon">🔵</span>
+        <h4>Espermatogénesis</h4>
+        <p>Formación y maduración del espermatozoide</p>
+      </div>
+
+      <div class="map-card type-gameto">
+        <span class="map-card-number">02</span>
+        <span class="map-card-tag">Gametogénesis</span>
+        <span class="map-card-icon">🔴</span>
+        <h4>Ovogénesis</h4>
+        <p>Formación y maduración del óvulo</p>
+      </div>
+
+      <div class="map-card type-fertil">
+        <span class="map-card-number">03</span>
+        <span class="map-card-tag">Fertilización</span>
+        <span class="map-card-icon">✨</span>
+        <h4>Fertilización</h4>
+        <p>Unión del espermatozoide y el óvulo</p>
+      </div>
+
+      <div class="map-card type-semana">
+        <span class="map-card-number">04</span>
+        <span class="map-card-tag">Desarrollo</span>
+        <span class="map-card-icon">🟡</span>
+        <h4>Semana 1</h4>
+        <p>Segmentación e inicio del viaje al útero</p>
+      </div>
+
+      <div class="map-card type-semana">
+        <span class="map-card-number">05</span>
+        <span class="map-card-tag">Desarrollo</span>
+        <span class="map-card-icon">🟡</span>
+        <h4>Semana 2</h4>
+        <p>Implantación en el endometrio</p>
+      </div>
+
+      <div class="map-card type-semana">
+        <span class="map-card-number">06</span>
+        <span class="map-card-tag">Desarrollo</span>
+        <span class="map-card-icon">🟡</span>
+        <h4>Semana 3</h4>
+        <p>Gastrulación y formación de capas germinales</p>
+      </div>
+
+      <div class="map-card type-semana">
+        <span class="map-card-number">07</span>
+        <span class="map-card-tag">Desarrollo</span>
+        <span class="map-card-icon">🟡</span>
+        <h4>Semanas 4 – 5</h4>
+        <p>Organogénesis y pliegue embrionario</p>
+      </div>
+
+      <div class="map-card type-semana">
+        <span class="map-card-number">08</span>
+        <span class="map-card-tag">Desarrollo</span>
+        <span class="map-card-icon">🟡</span>
+        <h4>Semanas 6 – 9</h4>
+        <p>Maduración y diferenciación de órganos</p>
+      </div>
+
     </div>
+  </div>
 
-<!-- End page content -->
-  
-</div>
+  <!-- Separador visual antes de las cards -->
+  <p style="margin-bottom: 20px;">Elige la experiencia que mejor se adapta a ti:</p>
 
-<!-- W3.CSS Container -->
-<div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px"><p class="w3-right">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></p></div>
+  <!-- Cards de acceso -->
+  <div class="cards">
+    <div class="card">
+      <div class="card-stripe"></div>
+      <div class="card-header">
+        <span class="card-icon">🧒</span>
+        <h3>Para visitas generales</h3>
+        <p>Recorrido con lenguaje accesible para el público general, familias y grupos escolares. Incluye la narrativa de cuento sobre el desarrollo embrionario.</p>
+      </div>
+      <div class="card-footer">
+        <a href="index_cuento.html" class="btn btn-red">Entrar →</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-stripe"></div>
+      <div class="card-header">
+        <span class="card-icon">🔬</span>
+        <h3>Para estudiantes del área de la salud</h3>
+        <p>Contenido técnico con terminología médica, casos clínicos y secuencia didáctica para estudiantes de Medicina y Ciencias Biomédicas pertenecientes a la Universidad Autónoma de Chihuahua.</p>
+      </div>
+      <div class="card-footer">
+        <a href="index_estudiantes.html" class="btn btn-blue">Entrar →</a>
+      </div>
+    </div>
+  </div>
 
+</section>
+
+  <!-- Información -->
+  <section class="section" id="informacion">
+    <p class="section-label">Visítanos</p>
+    <h2>Información</h2>
+    <div class="section-divider"><span></span><span></span><span></span></div>
+    <p>Croquis con la ubicación del Museo dentro de la Facultad de Medicina y Ciencias Biomédicas de la UACH.</p>
+    <div class="info-grid">
+      <img src="imagenes/croquis.jpg" alt="Croquis del museo">
+      <div>
+        <div class="info-detail-item">
+          <div class="icon">📍</div>
+          <div class="text">
+            <strong>Ubicación</strong>
+            <span>Campus II, Periférico de la Juventud<br>Facultad de Medicina y Ciencias Biomédicas<br>Universidad Autónoma de Chihuahua</span>
+          </div>
+        </div>
+        <div class="info-detail-item">
+          <div class="icon">🏛️</div>
+          <div class="text">
+            <strong>Acceso</strong>
+            <span>Entrada libre para el público en general</span>
+          </div>
+        </div>
+        <div class="info-detail-item">
+          <div class="icon">📞</div>
+          <div class="text">
+            <strong>Secretaría de Extensión y Difusión</strong>
+            <span>(614) 439-18-24 · 414-49-73<br>414-21-45 · 414-52-97</span>
+          </div>
+        </div>
+        <div class="cita-banner">
+          <div>
+            <strong>¿Quieres agendar tu visita?</strong>
+            <p>Reserva tu espacio para grupos escolares, universitarios o visitas guiadas.</p>
+          </div>
+          <a href="https://quixotic-veronika-uach-98c1e80d.koyeb.app/inicio" target="_blank" class="btn btn-yellow">Agendar →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section class="section" id="contacto">
+    <p class="section-label">Escríbenos</p>
+    <h2>Contacto</h2>
+    <div class="section-divider"><span></span><span></span><span></span></div>
+    <p>Si deseas más información sobre el Museo, puedes visitar nuestras instalaciones o comunicarte directamente con nosotros.</p>
+    <div class="contact-box">
+      <div>
+        <h3>Encuéntranos</h3>
+        <div class="contact-info-item">
+          <span class="ci-icon">🏫</span>
+          <span>Facultad de Medicina y Ciencias Biomédicas, UACH — Campus II, Periférico de la Juventud, Chihuahua, Chih., México.</span>
+        </div>
+        <div class="contact-info-item">
+          <span class="ci-icon">📞</span>
+          <span>(614) 439-18-24<br>414-49-73 · 414-21-45 · 414-52-97</span>
+        </div>
+      </div>
+      <div>
+        <h3>Visitas y grupos</h3>
+        <div class="contact-info-item">
+          <span class="ci-icon">ℹ️</span>
+          <span>Para grupos y visitas guiadas te recomendamos agendar con anticipación a través de nuestro sistema en línea.</span>
+        </div>
+        <div class="contact-info-item">
+          <span class="ci-icon">🌐</span>
+          <a href="https://quixotic-veronika-uach-98c1e80d.koyeb.app/inicio" style="color:var(--yellow)">embryopass.onrender.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2025 Museo de Embriología "Dra. Dora Virginia Chávez Corral" · Universidad Autónoma de Chihuahua</p>
+</footer>
+
+<!-- ══ JAVASCRIPT ══════════════════════════════════════════════ -->
 <script>
-// Script to open and close sidebar
-function w3_open() {
-  document.getElementById("mySidebar").style.display = "block";
-  document.getElementById("myOverlay").style.display = "block";
-}
- 
-function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-  document.getElementById("myOverlay").style.display = "none";
+
+// ── 1. Sidebar móvil ─────────────────────────────────────────
+const sidebar    = document.getElementById('sidebar');
+const overlay    = document.getElementById('overlay');
+const menuToggle = document.getElementById('menu-toggle');
+
+menuToggle.addEventListener('click', () => {
+  sidebar.classList.add('open');
+  overlay.classList.add('show');
+});
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('open');
+  overlay.classList.remove('show');
+});
+// Cierra sidebar al tocar un enlace
+document.querySelectorAll('#sidebar-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('show');
+  });
+});
+
+// ── 2. Barra de progreso ─────────────────────
+const progress = document.getElementById('progress');
+const sections = document.querySelectorAll('section[id]');
+const allLinks  = document.querySelectorAll('#nav-links a, #sidebar-links a');
+
+window.addEventListener('scroll', () => {
+  const scrolled = document.documentElement.scrollTop;
+  const total    = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+  // Progreso
+  progress.style.transform = `scaleX(${scrolled / total})`;
+
+  // Enlace activo
+  let current = '';
+  sections.forEach(sec => {
+    if (scrolled >= sec.offsetTop - 120) current = sec.id;
+  });
+  allLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === `#${current}`);
+  });
+
+}, { passive: true });
+
+// ── 3. Scroll reveal ─────────────────────────────────────────
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target); // se anima solo una vez
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.section').forEach(el => revealObserver.observe(el));
+
+// ── 4. Contadores animados en el hero ────────────────────────
+function animateCount(el) {
+  const target   = parseInt(el.dataset.target);
+  const isYear   = el.dataset.year === 'true';
+  const suffix   = el.dataset.suffix || '';
+  const start    = isYear ? target - 30 : 0;
+  const duration = 1400;
+
+  const step = (timestamp, startTime) => {
+    const prog  = Math.min((timestamp - startTime) / duration, 1);
+    const eased = 1 - Math.pow(1 - prog, 3); // ease-out cúbico
+    el.textContent = Math.floor(start + (target - start) * eased) + suffix;
+    if (prog < 1) requestAnimationFrame(ts => step(ts, startTime));
+    else el.textContent = target + suffix;
+  };
+
+  requestAnimationFrame(ts => step(ts, ts));
 }
 
-// Modal Image Gallery
-function onClick(element) {
-  document.getElementById("img01").src = element.src;
-  document.getElementById("modal01").style.display = "block";
-  var captionText = document.getElementById("caption");
-  captionText.innerHTML = element.alt;
+// Solo se activa cuando el hero entra en pantalla
+const heroObserver = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) {
+    document.querySelectorAll('.stat .num[data-target]').forEach(animateCount);
+    heroObserver.disconnect();
+  }
+}, { threshold: 0.5 });
+
+// DATOS DE LA LINEA DEL TIEMPO
+const timelineData = [
+  {
+    year: '1993',
+    title: 'Primera exposición',
+    summary: 'La "Primera Exposición de Muestras Embriológicas" se realizó del 23 al 30 de abril. El primer día, camiones repletos de jóvenes y reporteros esperaban en la Plaza Agustín Melgar.',
+    content: `
+      <p>El origen del Museo se dio en 1991. En mi ejercicio docente les solicitaba a mis 
+      estudiantes que realizaran maquetas tridimensionales sobre los temas con mayor 
+      dificultad para entender. La realización de esas maquetas resultó en una estrategia 
+      "ganar-ganar" para docente y alumnos.</p>
+      <p>Así fue como armamos la <strong>"Primera Exposición de Muestras Embriológicas"</strong>, 
+      del 23 al 30 de abril de 1993.</p>
+      <figure>
+        <img src="imagenes/Figura_1.jpg" alt="Explicación tema genitourinario, 1992">
+        <figcaption>Explicación del tema genitourinario, Dra. Dora Virginia Chávez Corral y estudiantes, Campus Colón, 1992.</figcaption>
+      </figure>
+      <figure>
+        <img src="imagenes/Figura_2.jpg" alt="Tríptico primera exposición" style="max-width:280px">
+        <figcaption>Tríptico de la Primera Exposición de Muestras Embriológicas, 1993.</figcaption>
+      </figure>
+      <figure>
+        <img src="imagenes/Figura_3.jpg" alt="Primera exposición, 1993">
+        <figcaption>Primera Exposición de Muestras Embriológicas, Campus Colón, 1993.</figcaption>
+      </figure>
+    `
+  },
+  {
+    year: '1994',
+    title: 'Segunda exposición',
+    summary: 'Se agregó una sección de pinturas elaboradas por los propios estudiantes relacionadas con la embriología.',
+    content: `
+      <p>Se agregó una sección de pinturas cuyo tema estaba relacionado con la embriología, 
+      realizadas por los mismos estudiantes. Ya la prensa sabía de nuestra exposición y 
+      difundieron la inauguración en el Heraldo de Chihuahua del 19 de abril de 1994.</p>
+    `
+  },
+  {
+    year: '1996',
+    title: 'Tercera exposición',
+    summary: 'A la entrada colocamos la pintura "Estudiante embarazada". En septiembre nos invitaron al programa radiofónico "La Salud y Usted".',
+    content: `
+      <p>Del 29 de abril al 3 de mayo de 1996 se llevó a cabo la "Tercera Exposición de 
+      Muestras Embriológicas". A la entrada colocamos la pintura "Estudiante embarazada" 
+      elaborada por uno de nuestros estudiantes.</p>
+      <figure>
+        <img src="imagenes/Figura_4.jpg" alt="Tríptico tercera exposición" style="max-width:260px">
+        <figcaption>Tríptico de la Tercera Exposición de Muestras Embriológicas, 1996.</figcaption>
+      </figure>
+      <figure>
+        <img src="imagenes/Figura_5.jpg" alt="Pintura Estudiante embarazada" style="max-width:260px">
+        <figcaption>Pintura "Estudiante embarazada", entrada a la Tercera Exposición, 1996.</figcaption>
+      </figure>
+    `
+  },
+  {
+    year: '2002',
+    title: 'Formalización del Museo',
+    summary: 'Se obtuvo un espacio fijo en el vestíbulo del auditorio de la Facultad de Medicina Campus Colón. Entrada totalmente libre.',
+    content: `
+      <p>Se solicitó a la dirección de la Facultad un espacio fijo para el Museo. Se instalaron 
+      las maquetas en el vestíbulo del auditorio de la Facultad de Medicina Campus Colón, 
+      junto con piezas anatómicas. La entrada era totalmente libre.</p>
+    `
+  },
+  {
+    year: '2006',
+    title: '"La embriología en el arte…"',
+    summary: 'Exposición de pintura "La Embriología en el arte … más allá de lo académico". La obra "Inocencia Truncada" fue publicada en revista científica en 2007.',
+    content: `
+      <p>Se publicó una convocatoria para la exposición de pintura titulada 
+      <em>"La Embriología en el arte … más allá de lo académico"</em>. El 9 de enero de 2006 
+      se llevó a cabo una emotiva ceremonia. La obra "Inocencia Truncada" fue publicada 
+      en la Revista Médico Científica de la UACH en 2007.</p>
+      <figure>
+        <img src="imagenes/Figura_6.jpg" alt="Inocencia Truncada" style="max-width:260px">
+        <figcaption>Publicación de "Inocencia Truncada", Revista Médico Científica, UACH, 2007.</figcaption>
+      </figure>
+    `
+  },
+  {
+    year: '2010',
+    title: 'Cambio de sede',
+    summary: 'Traslado al Campus II de la UACH en el Periférico de la Juventud. Las piezas se guardaron por varios años.',
+    content: `
+      <p>Nos cambiamos a las nuevas instalaciones de la Facultad de Medicina en el Campus II 
+      de la UACH, Periférico de la Juventud. Las piezas del Museo se guardaron en el 
+      nuevo campus por varios años.</p>
+      <figure>
+        <img src="imagenes/Figura_7.jpg" alt="Recorrido museo Campus II">
+        <figcaption>Recorrido a alumnos de Delicias, Museo de Embriología Campus II, 2023.</figcaption>
+      </figure>
+    `
+  },
+  {
+    year: '2018',
+    title: 'Reapertura',
+    summary: 'Con motivo de la XXIII Reunión Nacional de Morfología se reabrió el Museo. Las nuevas maquetas, elaboradas con ayuda de la Facultad de Artes, lograron gran colorido.',
+    content: `
+      <p>Con motivo de la XXIII Reunión Nacional de Morfología se reabrió el Museo. 
+      Con la ayuda del Dr. Javier Camarillo y estudiantes de la Facultad de Artes, 
+      las nuevas maquetas lograron gran colorido. Del 23 al 27 de septiembre de 2019 
+      se inauguró el renovado Museo ¡y para mi sorpresa le pusieron mi nombre!</p>
+      <figure>
+        <img src="imagenes/Figura_8.jpg" alt="XXIII Reunión Nacional de Morfología" style="max-width:260px">
+        <figcaption>Flyer de la XXIII Reunión Nacional de Morfología, Campus II, 2019.</figcaption>
+      </figure>
+    `
+  },
+  {
+    year: '2020',
+    title: 'Actualidad',
+    summary: 'Se integró un equipo para revisar y clasificar todos los embriones y fetos. En 2023 se formaron 4 equipos de trabajo adicionales y se diseñó el Isotipo del Museo.',
+    content: `
+      <p>A partir de 2020 se integró un equipo de trabajo para revisar y clasificar todos los 
+      embriones y fetos del Laboratorio de Embriología. En 2023 se formaron 4 equipos 
+      adicionales: diseño operativo, guion para estudiantes de salud, guion en cuento 
+      para niños, y casos clínicos.</p>
+      <figure>
+        <img src="imagenes/Figura_9.jpg" alt="Premiación diseño operativo" style="max-width:200px">
+        <figcaption>Premiación presentación oral sobre Diseño Operativo, Tuxtla Gutiérrez, 2023.</figcaption>
+      </figure>
+      <figure>
+        <img src="imagenes/Figura_10.jpg" alt="Expo Corazón ITESM">
+        <figcaption>Equipo de Cuento en "Expo Corazón", ITESM Campus Chihuahua, 2023.</figcaption>
+      </figure>
+      <figure>
+        <img src="imagenes/Figura_11.jpg" alt="Congreso Ginecología" style="max-width:280px">
+        <figcaption>Equipo de Casos Clínicos, XXXI Congreso Regional de Ginecología, Ciudad Juárez, 2024.</figcaption>
+      </figure>
+      <figure>
+        <img src="imagenes/Figura_12.jpg" alt="Concurso isotipo">
+        <figcaption>Premiación Concurso de Isotipo del Museo, Chihuahua, 2023.</figcaption>
+      </figure>
+      <figure>
+        <img src="imagenes/Figura_13.jpg" alt="Convivio equipo de trabajo">
+        <figcaption>Convivio con equipo del Laboratorio de Embriología y la Dra. Chávez Corral, 2023.</figcaption>
+      </figure>
+    `
+  }
+];
+
+//GENERAR TIMELINE DESDE DATOS (ARRAY)
+function buildTimeline() {
+  const container = document.getElementById('timeline-container');
+
+  // Genera un elemento por cada entrada del array
+  timelineData.forEach((item, index) => {
+    const el = document.createElement('div');
+    el.className = 'tl-item';
+    el.innerHTML = `
+      <div class="tl-year">
+        <span class="tl-year-badge">${item.year}</span>
+      </div>
+      <div class="tl-body">
+        <div class="tl-header">
+          <div class="tl-header-left">
+            <h3>${item.title}</h3>
+            <p class="tl-summary">${item.summary}</p>
+          </div>
+          <span class="tl-toggle">+</span>
+        </div>
+        <div class="tl-content">
+          ${item.content}
+        </div>
+      </div>
+    `;
+
+    // Clic para expandir / colapsar
+    const header = el.querySelector('.tl-header');
+    header.addEventListener('click', () => {
+      const isOpen = el.classList.contains('open');
+
+      // Cierra todos los demás (comportamiento acordeón)
+      document.querySelectorAll('.tl-item.open').forEach(other => {
+        other.classList.remove('open');
+      });
+
+      // Si no estaba abierto, ábrelo
+      if (!isOpen) {
+        el.classList.add('open');
+        // Scroll suave al elemento para que quede visible
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+      }
+    });
+
+    container.appendChild(el);
+  });
 }
+
+// Llama a la función cuando carga la página
+buildTimeline();
+
+heroObserver.observe(document.getElementById('inicio'));
+
 </script>
-
 </body>
 </html>
