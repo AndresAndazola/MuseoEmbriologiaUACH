@@ -208,7 +208,7 @@ body {
   .tl-item       { grid-template-columns: 60px 1fr; }
   .hero-stats    { gap: 28px; flex-wrap: wrap; }
   #hero h1       { font-size: 1.6rem; max-width: 100%; }
-  .hero-tag      { white-space: normal; max-width: 100%; }
+  .hero-tag      { font-size: 0.6rem; padding: 4px 10px; white-space: nowrap; max-width: fit-content; }
   #hero .hero-sub { font-size: 0.85rem; }
 }
 
@@ -228,6 +228,7 @@ body {
   overflow: hidden;
   width: 100%;
   max-width: 100%;
+  box-sizing: border-box;
 }
 #hero::before {
   content: '';
@@ -763,6 +764,21 @@ footer {
   letter-spacing: 0.04em;
 }
 footer a { color: var(--yellow); text-decoration: none; }
+
+/* ===== AJUSTES SOLO PARA CELULAR ===== */
+@media (max-width: 768px) {
+
+  #hero {padding: 60px 22px 50px;}
+  .section {padding: 52px 22px;}
+  .contact-box {padding: 28px 22px;}
+
+  footer {
+    padding: 18px 22px;
+  }
+
+  #navbar .brand {font-size: 0.9rem;}
+  #navbar .brand span {font-size: 0.6rem;}
+}
 
 </style>
 </head>
