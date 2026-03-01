@@ -203,19 +203,16 @@ body {
 @media (max-width: 720px) {
   /* Hero */
   .section        { padding: 52px 22px; }
-  #inicio         { padding: 0; }
   #hero           { padding: 60px 22px 50px; width: 100%; box-sizing: border-box; }
   .hero-stats     { gap: 28px; flex-wrap: wrap; }
   #hero h1        { font-size: 1.6rem; max-width: 100%; }
   .hero-tag       { font-size: 0.6rem; padding: 4px 10px; white-space: nowrap; max-width: fit-content; }
   #hero .hero-sub { font-size: 0.85rem; }
 
-  /* Timeline */
-  .tl-item              { grid-template-columns: 56px 1fr; }
-  .tl-header            { margin-left: 0; padding: 8px 4px 8px 0; align-items: flex-start; }
-  .tl-header-left h3    { font-size: 0.88rem; line-height: 1.35; }
-  .tl-body              { padding: 8px 0 24px 6px; }
-  .tl-toggle            { width: 24px; height: 24px; font-size: 0.85rem; flex-shrink: 0; margin-left: 8px; margin-top: 2px; }
+  /* Timeline — el margin-left negativo causa el corte de texto */
+  .tl-item        { grid-template-columns: 64px 1fr; }
+  .tl-header      { margin-left: 0; padding: 10px 0; align-items: flex-start; }
+  .tl-toggle      { margin-left: 10px; margin-top: 2px; flex-shrink: 0; }
   .tl-header-left .tl-summary { display: none; }
 
   /* Info grid */
@@ -502,7 +499,7 @@ body {
 }
 
 /* Responsive */
-/* timeline summary oculto en móvil — incluido en bloque principal */
+/* reglas del timeline en móvil — ver bloque @media (max-width: 720px) principal */
 
 /* ══════════════════════════════════════════
    MAPA DE CONTENIDOS — GRID
@@ -785,8 +782,7 @@ footer {
 }
 footer a { color: var(--yellow); text-decoration: none; }
 
-/* ===== AJUSTES SOLO PARA CELULAR ===== */
-/* ajustes móvil unificados en bloque @media (max-width: 720px) arriba */
+/* ajustes móvil unificados en bloque @media (max-width: 720px) principal */
 
 /* --- SOLUCIÓN DESBORDAMIENTO MÓVIL --- */
 
