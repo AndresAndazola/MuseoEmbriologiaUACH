@@ -208,7 +208,7 @@ body {
   .tl-item       { grid-template-columns: 60px 1fr; }
   .hero-stats    { gap: 28px; flex-wrap: wrap; }
   #hero h1       { font-size: 1.6rem; max-width: 100%; }
-  .hero-tag      { white-space: normal; max-width: 100%; }
+  .hero-tag      { font-size: 0.6rem; padding: 4px 10px; white-space: nowrap; max-width: fit-content; }
   #hero .hero-sub { font-size: 0.85rem; }
 }
 
@@ -226,6 +226,9 @@ body {
   padding: 80px 60px 70px;
   position: relative;
   overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 #hero::before {
   content: '';
@@ -762,6 +765,21 @@ footer {
 }
 footer a { color: var(--yellow); text-decoration: none; }
 
+/* ===== AJUSTES SOLO PARA CELULAR ===== */
+@media (max-width: 768px) {
+
+  #hero {padding: 60px 22px 50px;}
+  .section {padding: 52px 22px;}
+  .contact-box {padding: 28px 22px;}
+
+  footer {
+    padding: 18px 22px;
+  }
+
+  #navbar .brand {font-size: 0.9rem;}
+  #navbar .brand span {font-size: 0.6rem;}
+}
+
 </style>
 </head>
 <body>
@@ -811,23 +829,23 @@ footer a { color: var(--yellow); text-decoration: none; }
 <main id="main">
 
   <!-- Hero -->
-  <section id="inicio">
-    <div id="hero">
-      <div class="hero-tag">Universidad Autónoma de Chihuahua</div>
-      <h1>Museo de Embriología<br><em>"Dra. Dora Virginia Chávez Corral"</em></h1>
-      <p class="hero-sub">Facultad de Medicina y Ciencias Biomédicas · Campus II</p>
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="num" data-target="1993" data-year="true">1993</span>
-          <span class="lbl">Fundado</span>
-        </div>
-        <div class="stat">
-          <span class="num" data-target="30" data-suffix="+">30+</span>
-          <span class="lbl">Años de historia</span>
-        </div>
+<section id="inicio" style="overflow:hidden">
+  <div id="hero">
+    <div class="hero-tag">Universidad Autónoma de Chihuahua</div>
+    <h1>Museo de Embriología<br><em>"Dra. Dora Virginia Chávez Corral"</em></h1>
+    <p class="hero-sub">Facultad de Medicina y Ciencias Biomédicas · Campus II</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="num" data-target="1993" data-year="true">1993</span>
+        <span class="lbl">Fundado</span>
+      </div>
+      <div class="stat">
+        <span class="num" data-target="30" data-suffix="+">30+</span>
+        <span class="lbl">Años de historia</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- Misión -->
   <section class="section" id="mision">
