@@ -113,7 +113,7 @@ body {
 #menu-toggle span {
   display: block;
   width: 24px; height: 2px;
-  background: var(--text);
+  background: var(--white);
   border-radius: 2px;
   transition: all 0.3s;
 }
@@ -187,21 +187,23 @@ body {
    RESPONSIVE
 ══════════════════════════════════════════ */
 @media (max-width: 900px) {
-  #navbar nav    { display: none; }   /* oculta links del navbar */
-  #menu-toggle   { display: flex; }   /* muestra botón hamburguesa */
+  #navbar nav    { display: none; }
+  #menu-toggle   { display: flex; }
   #main          { padding-top: 64px; }
-  #progress      { top: 64px; }       /* debajo del navbar en móvil */
+  #progress      { top: 64px; }
+  #navbar        { padding: 0 20px; }      /* ← nuevo */
 }
 @media (min-width: 901px) {
-  #sidebar       { display: none !important; } /* nunca visible en escritorio */
+  #sidebar       { display: none !important; }
   #main          { padding-top: 80px; }
 }
 @media (max-width: 720px) {
   .section       { padding: 52px 22px; }
-  #hero          { padding: 60px 22px; }
+  #hero          { padding: 60px 22px 50px; }
   .info-grid,
   .contact-box   { grid-template-columns: 1fr; }
   .tl-item       { grid-template-columns: 60px 1fr; }
+  .hero-stats    { gap: 28px; }            /* ← nuevo */
 }
 
 /* ══════════════════════════════════════════
@@ -321,6 +323,7 @@ body {
   max-width: 780px;
   margin-bottom: 16px;
   font-size: 0.97rem;
+  text-align: justify;
 }
 /* ══════════════════════════════════════════
    TIMELINE INTERACTIVO
@@ -556,6 +559,7 @@ body {
   color: var(--muted);
   line-height: 1.4;
   margin: 0;
+  text-align: center;
 }
 
 /* Etiqueta de categoría */
@@ -814,10 +818,6 @@ footer a { color: var(--yellow); text-decoration: none; }
         <div class="stat">
           <span class="num" data-target="30" data-suffix="+">30+</span>
           <span class="lbl">Años de historia</span>
-        </div>
-        <div class="stat">
-          <span class="num">3D</span>
-          <span class="lbl">Maquetas interactivas</span>
         </div>
       </div>
     </div>
