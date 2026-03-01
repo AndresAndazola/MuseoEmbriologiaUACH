@@ -498,8 +498,10 @@ body {
 
 /* Responsive */
 @media (max-width: 720px) {
-  .tl-item { grid-template-columns: 60px 1fr; }
-  .tl-header-left .tl-summary { display: none; } /* en móvil solo el título */
+  .tl-item                     { grid-template-columns: 60px 1fr; }
+  .tl-header-left .tl-summary  { display: none; }
+  .tl-header                   { margin-left: 0; padding: 8px 8px 8px 0; align-items: flex-start; }
+  .tl-toggle                   { margin-top: 3px; flex-shrink: 0; }
 }
 
 /* ══════════════════════════════════════════
