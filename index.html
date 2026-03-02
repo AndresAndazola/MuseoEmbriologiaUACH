@@ -210,15 +210,12 @@ body {
   .hero-tag       { font-size: 0.6rem; padding: 4px 10px; white-space: nowrap; max-width: fit-content; }
   #hero .hero-sub { font-size: 0.85rem; }
 
-  /* Timeline — sin botón en móvil, fondo completo clickeable */
+  /* Timeline */
   .tl-item                    { grid-template-columns: 64px 1fr; gap: 0 8px; }
   .tl-body                    { padding: 8px 0 20px 4px; }
-  .tl-header                  { padding: 12px 10px; border-radius: 8px; background: rgba(0,0,0,0.03); margin-bottom: 2px; }
-  .tl-header-left h3          { font-size: 0.92rem; line-height: 1.4; }
+  .tl-header                  { padding: 10px 6px; }
+  .tl-header-left h3          { font-size: 0.9rem; line-height: 1.4; }
   .tl-header-left .tl-summary { display: none; }
-  .tl-toggle                  { display: none; }
-  .tl-item.open .tl-header    { background: var(--red-pale); }
-  .tl-item.open .tl-header .tl-header-left h3 { color: var(--red); }
   
   /* Info grid */
   .info-grid                   { grid-template-columns: 1fr; gap: 20px; }
@@ -423,22 +420,26 @@ body {
 .tl-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   cursor: pointer;
-  padding: 10px 40px 10px 14px ;
+  padding: 10px 14px;
   border-radius: 8px;
   transition: background 0.2s;
-  margin-left:0px !important;
+  margin-left: 0;
   user-select: none;
-  position: relative;
 }
 .tl-header:hover { background: rgba(0,0,0,0.04); }
 
+.tl-header-left {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
 .tl-header-left h3 {
   font-family: 'Libre Baskerville', serif;
   color: var(--red);
   font-size: 1rem;
-  margin-bottom: 4px;
+  margin-bottom: 0;
+  display: inline;
 }
 .tl-header-left .tl-summary {
   font-size: 0.82rem;
@@ -449,27 +450,20 @@ body {
 
 /* Ícono de expandir */
 .tl-toggle {
-  position: absolute;
-  right: 0;
-  top: 10px;
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  background: var(--blue-lt);
+  display: inline-block;
   color: var(--blue);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1;
+  margin-left: 6px;
+  transition: transform 0.3s;
   flex-shrink: 0;
-  margin-left: auto;        
-  align-self: flex-start;  
-  transition: all 0.3s;
+  vertical-align: middle;
 }
 
 .tl-item.open .tl-toggle {
-  background: var(--red);
-  color: #fff;
-  transform: rotate(45deg);
+  transform: rotate(90deg);
+  color: var(--red);
 }
 
 /* Contenido expandible */
@@ -1339,7 +1333,7 @@ function buildTimeline() {
             <h3>${item.title}</h3>
             <p class="tl-summary">${item.summary}</p>
           </div>
-          <span class="tl-toggle">+</span>
+          <span class="tl-toggle">›</span>
         </div>
         <div class="tl-content">
           ${item.content}
