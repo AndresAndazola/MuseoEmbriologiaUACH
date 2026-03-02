@@ -220,7 +220,7 @@ body {
   .tl-content p   { max-width: 100%; word-break: break-word; overflow-wrap: break-word; }
   .tl-content img { max-width: 100%; height: auto; display: block; }
   .tl-body        { overflow: hidden; }
-  
+
   /* Info grid */
   .info-grid                   { grid-template-columns: 1fr; gap: 20px; }
   .info-grid img               { max-width: 100%; height: auto; }
@@ -423,27 +423,28 @@ body {
 
 .tl-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   cursor: pointer;
   padding: 10px 14px;
   border-radius: 8px;
   transition: background 0.2s;
   margin-left: 0;
   user-select: none;
+  gap: 8px;
 }
 .tl-header:hover { background: rgba(0,0,0,0.04); }
 
 .tl-header-left {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  display: block;
+  flex: 1;
+  min-width: 0;
 }
 .tl-header-left h3 {
   font-family: 'Libre Baskerville', serif;
   color: var(--red);
   font-size: 1rem;
-  margin-bottom: 0;
-  display: inline;
+  margin-bottom: 4px;
+  display: block;
 }
 .tl-header-left .tl-summary {
   font-size: 0.82rem;
@@ -459,10 +460,9 @@ body {
   font-size: 1.2rem;
   font-weight: 400;
   line-height: 1;
-  margin-left: 6px;
+  margin-top: 3px;
   transition: transform 0.3s;
   flex-shrink: 0;
-  vertical-align: middle;
 }
 
 .tl-item.open .tl-toggle {
@@ -824,6 +824,7 @@ html, body {
     <a href="#recorrido">Recorrido</a>
     <a href="#informacion">Información</a>
     <a href="#contacto">Contacto</a>
+    <a href="index_estudiantes.html" style="background: var(--yellow); color: var(--text); font-weight: 700; border-radius: 5px; padding: 6px 12px;">Estudiantes</a>
   </nav>
   <button id="menu-toggle" aria-label="Abrir menú">
     <span></span><span></span><span></span>
@@ -844,6 +845,7 @@ html, body {
     <a href="#recorrido">Recorrido Virtual</a>
     <a href="#informacion">Información</a>
     <a href="#contacto">Contacto</a>
+    <a href="index_estudiantes.html" style="background: var(--yellow); color: var(--text); font-weight: 700; padding: 6px 12px;">Estudiantes</a>
   </nav>
 </aside>
 <div id="overlay"></div>
