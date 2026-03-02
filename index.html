@@ -209,11 +209,13 @@ body {
   .hero-tag       { font-size: 0.6rem; padding: 4px 10px; white-space: nowrap; max-width: fit-content; }
   #hero .hero-sub { font-size: 0.85rem; }
 
-  /* Timeline — el margin-left negativo causa el corte de texto */
-  .tl-item        { grid-template-columns: 64px 1fr; }
-  .tl-header      { margin-left: 0; padding: 10px 0; align-items: flex-start; }
-  .tl-toggle      { margin-left: 10px; margin-top: 2px; flex-shrink: 0; }
-  .tl-header-left .tl-summary { display: none; max-width: 100%; }
+  /* Timeline */
+.tl-item { grid-template-columns: 48px 1fr; gap: 14px; }
+.tl-header { display: flex; justify-content: space-between; align-items: flex-start; margin-left: 0; padding: 8px 0; }
+.tl-header h3 { font-size: 1.05rem; line-height: 1.4; flex: 1; }
+.tl-toggle { margin-left: 8px; margin-top: 2px; width: 32px; height: 32px; flex-shrink: 0; }
+.tl-content { margin-top: 12px; }
+.tl-content p { max-width: 100%; font-size: 0.95rem; line-height: 1.7; }
 
   /* Info grid */
   .info-grid                   { grid-template-columns: 1fr; gap: 20px; }
@@ -854,7 +856,7 @@ html, body {
         <span class="lbl">Fundado</span>
       </div>
       <div class="stat">
-        <span class="num" data-target="30" data-suffix="+">30+</span>
+        <span class="num" data-target="+30" data-prefix="+">30</span>
         <span class="lbl">Años de historia</span>
       </div>
     </div>
