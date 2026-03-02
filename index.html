@@ -213,7 +213,7 @@ body {
   .tl-item        { grid-template-columns: 64px 1fr; }
   .tl-header      { margin-left: 0; padding: 10px 0; align-items: flex-start; }
   .tl-toggle      { margin-left: 10px; margin-top: 2px; flex-shrink: 0; }
-  .tl-header-left .tl-summary { display: none; }
+  .tl-header-left .tl-summary { display: none; max-width: 100%; }
 
   /* Info grid */
   .info-grid                   { grid-template-columns: 1fr; gap: 20px; }
@@ -423,7 +423,7 @@ body {
   padding: 10px 14px;
   border-radius: 8px;
   transition: background 0.2s;
-  margin-left: -14px;
+  margin-left:0px !important;
   user-select: none;
 }
 .tl-header:hover { background: rgba(0,0,0,0.04); }
