@@ -210,11 +210,15 @@ body {
   .hero-tag       { font-size: 0.6rem; padding: 4px 10px; white-space: nowrap; max-width: fit-content; }
   #hero .hero-sub { font-size: 0.85rem; }
 
-  /* Timeline */
-  .tl-item                    { grid-template-columns: 60px 1fr; gap: 0 8px; }
+  /* Timeline — sin botón en móvil, fondo completo clickeable */
+  .tl-item                    { grid-template-columns: 64px 1fr; gap: 0 8px; }
   .tl-body                    { padding: 8px 0 20px 4px; }
-  .tl-header-left h3          { font-size: 0.88rem; }
+  .tl-header                  { padding: 12px 10px; border-radius: 8px; background: rgba(0,0,0,0.03); margin-bottom: 2px; }
+  .tl-header-left h3          { font-size: 0.92rem; line-height: 1.4; }
   .tl-header-left .tl-summary { display: none; }
+  .tl-toggle                  { display: none; }
+  .tl-item.open .tl-header    { background: var(--red-pale); }
+  .tl-item.open .tl-header .tl-header-left h3 { color: var(--red); }
   
   /* Info grid */
   .info-grid                   { grid-template-columns: 1fr; gap: 20px; }
@@ -413,27 +417,23 @@ body {
 
 /* Cuerpo clickeable */
 .tl-body {
-  padding: 10px 0 32px 14px;
+  padding: 10px 0 32px 14px; position: relative;
 }
 
 .tl-header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  padding: 10px 14px;
+  padding: 10px 40px 10px 14px ;
   border-radius: 8px;
   transition: background 0.2s;
-  margin-left: 0;
+  margin-left:0px !important;
   user-select: none;
-  gap: 12px;
+  position: relative;
 }
 .tl-header:hover { background: rgba(0,0,0,0.04); }
 
-.tl-header-left {
-  flex: 1;
-  min-width: 0;
-}
 .tl-header-left h3 {
   font-family: 'Libre Baskerville', serif;
   color: var(--red);
@@ -449,6 +449,9 @@ body {
 
 /* Ícono de expandir */
 .tl-toggle {
+  position: absolute;
+  right: 0;
+  top: 10px;
   width: 28px; height: 28px;
   border-radius: 50%;
   background: var(--blue-lt);
@@ -458,7 +461,8 @@ body {
   justify-content: center;
   font-size: 1rem;
   flex-shrink: 0;
-  margin-top: 2px;
+  margin-left: auto;        
+  align-self: flex-start;  
   transition: all 0.3s;
 }
 
