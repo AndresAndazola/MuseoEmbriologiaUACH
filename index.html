@@ -216,6 +216,9 @@ body {
   .tl-header                  { padding: 10px 6px; }
   .tl-header-left h3          { font-size: 0.9rem; line-height: 1.4; }
   .tl-header-left .tl-summary { display: none; }
+  .tl-content     { overflow: hidden; }
+  .tl-content p   { max-width: 100%; word-break: break-word; }
+  .tl-content img { max-width: 100%; height: auto; display: block; }
   
   /* Info grid */
   .info-grid                   { grid-template-columns: 1fr; gap: 20px; }
@@ -632,7 +635,7 @@ body {
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
+  gap: 30px;
   margin-top: 32px;
 }
 .card {
