@@ -416,7 +416,7 @@ body {
 
 /* Cuerpo clickeable */
 .tl-body {
-  padding: 10px 0 32px 14px;
+  padding: 10px 0 32px 14px; position: relative;
 }
 
 .tl-header {
@@ -424,11 +424,12 @@ body {
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  padding: 10px 14px;
+  padding: 10px 40px 10px 14px ;
   border-radius: 8px;
   transition: background 0.2s;
   margin-left:0px !important;
   user-select: none;
+  position: relative;
 }
 .tl-header:hover { background: rgba(0,0,0,0.04); }
 
@@ -447,6 +448,9 @@ body {
 
 /* Ícono de expandir */
 .tl-toggle {
+  position: absolute;
+  right: 0;
+  top: 10px;
   width: 28px; height: 28px;
   border-radius: 50%;
   background: var(--blue-lt);
