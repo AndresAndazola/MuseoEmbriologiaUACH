@@ -211,13 +211,10 @@ body {
   #hero .hero-sub { font-size: 0.85rem; }
 
   /* Timeline */
-.tl-item                    { grid-template-columns: 64px 1fr; gap: 0 8px; }
-.tl-body                    { padding: 8px 0 20px 0; }
-.tl-header                  { display: grid !important; grid-template-columns: 1fr 36px; align-items: start; margin-left: 0; padding: 8px 0; gap: 0 8px; }
-.tl-header-left             { min-width: 0; }
-.tl-header-left h3          { font-size: 0.88rem; line-height: 1.4; }
-.tl-header-left .tl-summary { display: none; }
-.tl-toggle                  { width: 28px; height: 28px; margin: 0; align-self: start; justify-self: end; }
+  .tl-item                    { grid-template-columns: 60px 1fr; gap: 0 8px; }
+  .tl-body                    { padding: 8px 0 20px 4px; }
+  .tl-header-left h3          { font-size: 0.88rem; }
+  .tl-header-left .tl-summary { display: none; }
   
   /* Info grid */
   .info-grid                   { grid-template-columns: 1fr; gap: 20px; }
@@ -416,23 +413,27 @@ body {
 
 /* Cuerpo clickeable */
 .tl-body {
-  padding: 10px 0 32px 14px; position: relative;
+  padding: 10px 0 32px 14px;
 }
 
 .tl-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   cursor: pointer;
-  padding: 10px 40px 10px 0px ;
+  padding: 10px 14px;
   border-radius: 8px;
   transition: background 0.2s;
-  margin-left:0px !important;
+  margin-left: 0;
   user-select: none;
-  position: relative;
+  gap: 12px;
 }
 .tl-header:hover { background: rgba(0,0,0,0.04); }
 
+.tl-header-left {
+  flex: 1;
+  min-width: 0;
+}
 .tl-header-left h3 {
   font-family: 'Libre Baskerville', serif;
   color: var(--red);
@@ -448,10 +449,6 @@ body {
 
 /* Ícono de expandir */
 .tl-toggle {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
   width: 28px; height: 28px;
   border-radius: 50%;
   background: var(--blue-lt);
@@ -461,8 +458,7 @@ body {
   justify-content: center;
   font-size: 1rem;
   flex-shrink: 0;
-  margin-left: auto;        
-  align-self: flex-start;  
+  margin-top: 2px;
   transition: all 0.3s;
 }
 
