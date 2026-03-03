@@ -55,6 +55,45 @@ body {
 }
 
 /* ══════════════════════════════════════════
+   LOGIN SCREEN
+══════════════════════════════════════════ */
+#login-screen {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-md) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+#login-screen.hidden {
+  display: none;
+}
+
+.login-card {
+  background: var(--white);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+}
+
+.login-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: var(--text);
+  font-family: 'Libre Baskerville', serif;
+}
+
+.login-card #buttonDiv {
+  margin-top: 20px;
+}
+
+/* ══════════════════════════════════════════
    NAVBAR — escritorio
 ══════════════════════════════════════════ */
 #navbar {
@@ -510,86 +549,22 @@ body {
 </div>
 <div id="overlay"></div>
 
-<body>
-  <div id="login-screen">
-    <div class="login-card">
-      <img src="https://www.uach.mx/assets/img/logo-uach.png" alt="UACH" style="width: 120px; margin-bottom: 20px;">
-      <h2>Acceso Restringido</h2>
-      <p style="color: var(--muted); margin-bottom: 25px; font-size: 0.95rem;">
-        Este material es propiedad de la <strong>UACH</strong>. Por favor, inicia sesión con tu correo institucional para continuar.
-      </p>
-      <div id="buttonDiv" style="display: flex; justify-content: center;"></div>
-    </div>
+<!-- PANTALLA DE LOGIN -->
+<div id="login-screen">
+  <div class="login-card">
+    <img src="https://www.uach.mx/assets/img/logo-uach.png" alt="UACH" style="width: 120px; margin-bottom: 20px;">
+    <h2>Acceso Restringido</h2>
+    <p style="color: var(--muted); margin-bottom: 25px; font-size: 0.95rem;">
+      Este material es propiedad de la <strong>UACH</strong>. Por favor, inicia sesión con tu correo institucional para continuar.
+    </p>
+    <div id="buttonDiv" style="display: flex; justify-content: center;"></div>
   </div>
+</div>
 
-  <div id="protected-content">
-      <div id="progress"></div>
-      <header id="navbar"> ... </header>
-      <main id="main"> ... </main>
-      </div>
+<main id="main" style="display: none;">
+  <div id="progress"></div>
 
-  <script>
-    function handleCredentialResponse(response) {
-      // Decodificamos el usuario del token de Google
-      const payload = JSON.parse(atob(response.credential.split('.')[1]));
-      const email = payload.email;
-
-      // RESTRICCIÓN: Solo correos de la UACH
-      if (email.endsWith("@uach.mx")) {
-        document.getElementById('login-screen').style.display = 'none';
-        document.getElementById('protected-content').style.display = 'block';
-        // Guardamos que ya entró para que no pida login al recargar (mientras no cierre pestaña)
-        sessionStorage.setItem('uach_auth', 'true');
-      } else {
-        alert("Acceso denegado. Este contenido es exclusivo para la comunidad UACH (@uach.mx).");
-      }
-    }
-
-    window.onload = function () {
-      // Si ya se validó antes, entrar directo
-      if(sessionStorage.getItem('uach_auth') === 'true') {
-        document.getElementById('login-screen').style.display = 'none';
-        document.getElementById('protected-content').style.display = 'block';
-        return;
-      }
-
-      // Inicializar botón de Google
-      google.accounts.id.initialize({
-        client_id: "948887907429-vndjspoauneicam4bi6ic5p5bu80bf5g.apps.googleusercontent.com",
-        callback: handleCredentialResponse,
-        hd: "uach.mx" // Sugiere solo cuentas de la universidad
-      });
-
-      google.accounts.id.renderButton(
-        document.getElementById("buttonDiv"),
-        { theme: "outline", size: "large", text: "signin_with" }
-      );
-    };
-  </script>
-</body>
-
-<!-- ══════════ MAIN ══════════ -->
-<main id="main">
-
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-tag">Material educativo · UACH</div>
-    <h1>Guion del museo para estudiantes del área de la salud</h1>
-    <p class="hero-sub">Recurso de apoyo para comprender los fundamentos de la gametogénesis y la fertilización humana.</p>
-    <div class="hero-authors">
-      <div class="avatar-group">
-        <div class="avatar">JR</div>
-        <div class="avatar">FM</div>
-      </div>
-      <div class="author-names">
-        Jorge Eduardo Rivera Parra<br>
-        María Fernanda Maldonado Gurrola
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTENIDO -->
-  <div class="content-area">
+  <div id="content-area">
 
     <!-- Espermatogénesis -->
     <div class="section-block" id="espermatogenesis">
@@ -744,6 +719,49 @@ const observer = new IntersectionObserver(entries => {
 
 document.querySelectorAll('.animate').forEach(el => observer.observe(el));
 
+/* ── Google Sign-In ── */
+function handleCredentialResponse(response) {
+  // Decodificamos el usuario del token de Google
+  const payload = JSON.parse(atob(response.credential.split('.')[1]));
+  const email = payload.email;
+
+  // RESTRICCIÓN: Solo correos de la UACH
+  if (email.endsWith("@uach.mx")) {
+    document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('main').style.display = 'block';
+    document.getElementById('navbar').style.display = 'flex';
+    document.getElementById('sidebar').style.display = 'flex';
+    document.getElementById('progress').style.display = 'block';
+    // Guardamos que ya entró para que no pida login al recargar (mientras no cierre pestaña)
+    sessionStorage.setItem('uach_auth', 'true');
+  } else {
+    alert('Acceso denegado. Solo usuarios @uach.mx pueden acceder.');
+  }
+}
+
+window.onload = function () {
+  // Si ya se validó antes, entrar directo
+  if(sessionStorage.getItem('uach_auth') === 'true') {
+    document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('main').style.display = 'block';
+    document.getElementById('navbar').style.display = 'flex';
+    document.getElementById('sidebar').style.display = 'flex';
+    document.getElementById('progress').style.display = 'block';
+    return;
+  }
+
+  // Inicializar botón de Google
+  google.accounts.id.initialize({
+    client_id: "948887907429-vndjspoauneicam4bi6ic5p5bu80bf5g.apps.googleusercontent.com",
+    callback: handleCredentialResponse,
+    hd: "uach.mx" // Sugiere solo cuentas de la universidad
+  });
+
+  google.accounts.id.renderButton(
+    document.getElementById("buttonDiv"),
+    { theme: "outline", size: "large", text: "signin_with" }
+  );
+};
 
 </script>
 </body>
