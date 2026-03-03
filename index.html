@@ -189,16 +189,16 @@ body {
 @media (max-width: 900px) {
   #navbar nav    { display: none; }
   #menu-toggle   { display: flex; }
-  #main          { padding-top: 64px; }
+  #main          { padding-top: 62px; }
   #progress      { top: 64px; }
   #navbar        { padding: 0 20px; }
-  #inicio        { overflow: hidden; width: 100%; max-width: 100%; }
+  #inicio        { overflow: hidden; width: 100%; max-width: 100%; padding-top: 0%;}
   #hero          { width: 100%; max-width: 100%; }
 } 
 
 @media (min-width: 901px) {
   #sidebar       { display: none !important; }
-  #main          { padding-top: 80px; }
+  #main          { padding-top: 60px;}
 }
 @media (max-width: 720px) {
   /* Hero */
@@ -248,13 +248,14 @@ body {
       rgba(36, 113, 163, 0.85) 60%,
       rgba(26, 58, 92, 0.90)   100%
     ),
-    url('imagenes/facultad.jpg') center center / cover no-repeat;
-  padding: 80px 60px 70px;
+  url('imagenes/facultad.jpg') center center / cover no-repeat;
+  padding: 64px 56px 52px;
   position: relative;
   overflow: hidden;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
+  margin-top: -1px;
 }
 #hero::before {
   content: '';
