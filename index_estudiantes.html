@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
 
 /* ══════════════════════════════════════════
@@ -415,6 +416,40 @@ body {
 }
 #img-modal .close-modal:hover { opacity: 1; }
 
+/* Pantalla de bloqueo total */
+#login-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: var(--off-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-card {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  border-top: 6px solid var(--red);
+  text-align: center;
+  max-width: 420px;
+  width: 100%;
+}
+
+.login-card h2 {
+  font-family: 'Libre Baskerville', serif;
+  color: var(--blue);
+  margin-bottom: 15px;
+}
+
+/* Ocultar el contenido por defecto */
+#protected-content {
+  display: none;
+}
+
 /* ══════════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════════ */
@@ -474,6 +509,64 @@ body {
   </nav>
 </div>
 <div id="overlay"></div>
+
+<body>
+  <div id="login-screen">
+    <div class="login-card">
+      <img src="https://www.uach.mx/assets/img/logo-uach.png" alt="UACH" style="width: 120px; margin-bottom: 20px;">
+      <h2>Acceso Restringido</h2>
+      <p style="color: var(--muted); margin-bottom: 25px; font-size: 0.95rem;">
+        Este material es propiedad de la <strong>UACH</strong>. Por favor, inicia sesión con tu correo institucional para continuar.
+      </p>
+      <div id="buttonDiv" style="display: flex; justify-content: center;"></div>
+    </div>
+  </div>
+
+  <div id="protected-content">
+      <div id="progress"></div>
+      <header id="navbar"> ... </header>
+      <main id="main"> ... </main>
+      </div>
+
+  <script>
+    function handleCredentialResponse(response) {
+      // Decodificamos el usuario del token de Google
+      const payload = JSON.parse(atob(response.credential.split('.')[1]));
+      const email = payload.email;
+
+      // RESTRICCIÓN: Solo correos de la UACH
+      if (email.endsWith("@uach.mx")) {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('protected-content').style.display = 'block';
+        // Guardamos que ya entró para que no pida login al recargar (mientras no cierre pestaña)
+        sessionStorage.setItem('uach_auth', 'true');
+      } else {
+        alert("Acceso denegado. Este contenido es exclusivo para la comunidad UACH (@uach.mx).");
+      }
+    }
+
+    window.onload = function () {
+      // Si ya se validó antes, entrar directo
+      if(sessionStorage.getItem('uach_auth') === 'true') {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('protected-content').style.display = 'block';
+        return;
+      }
+
+      // Inicializar botón de Google
+      google.accounts.id.initialize({
+        client_id: "948887907429-vndjspoauneicam4bi6ic5p5bu80bf5g.apps.googleusercontent.com",
+        callback: handleCredentialResponse,
+        hd: "uach.mx" // Sugiere solo cuentas de la universidad
+      });
+
+      google.accounts.id.renderButton(
+        document.getElementById("buttonDiv"),
+        { theme: "outline", size: "large", text: "signin_with" }
+      );
+    };
+  </script>
+</body>
 
 <!-- ══════════ MAIN ══════════ -->
 <main id="main">
