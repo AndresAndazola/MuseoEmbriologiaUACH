@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
 
 /* ══════════════════════════════════════════
@@ -60,56 +59,6 @@ body {
   transform: scaleX(0);
   z-index: 999;
   transition: transform 0.1s linear;
-  display: none;
-}
-
-/* ══════════════════════════════════════════
-   LOGIN SCREEN
-══════════════════════════════════════════ */
-#login-screen {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-md) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 20px;
-}
-
-#login-screen.hidden {
-  display: none;
-}
-
-.login-card {
-  background: var(--white);
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-  max-width: 380px;
-  width: 100%;
-  text-align: center;
-}
-
-.login-card h2 {
-  font-size: 1.8rem;
-  margin-bottom: 15px;
-  color: var(--text);
-  font-family: 'Libre Baskerville', serif;
-}
-
-.login-card p {
-  font-size: 0.95rem;
-  color: var(--muted);
-  margin-bottom: 20px;
-}
-
-.login-card img {
-  animation: slideDown 0.6s ease-out;
-}
-
-.login-card #buttonDiv {
-  margin-top: 20px;
 }
 
 /* ══════════════════════════════════════════
@@ -121,7 +70,7 @@ body {
   height: 64px;
   background: var(--yellow);
   border-bottom: 3px solid var(--red);
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 40px;
@@ -196,7 +145,7 @@ body {
   z-index: 200;
   transform: translateX(-100%);
   transition: transform 0.4s cubic-bezier(0.77, 0, 0.18, 1);
-  display: none;
+  display: flex;
   flex-direction: column;
   overflow-y: auto;
 }
@@ -281,7 +230,6 @@ body {
   max-width: 100%;
   box-sizing: border-box;
   margin-top: 50px;
-  display: none;
 }
 
 #hero::before {
@@ -289,149 +237,268 @@ body {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(0,0,0,0.05) 0%, transparent 50%);
-  pointer-events: none;
+    radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 60%),
+    radial-gradient(circle at 20% 80%, rgba(26, 82, 118, 0.15) 0%, transparent 50%);
 }
 
-#hero .hero-content {
+#hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: none;
+}
+
+.hero-tag {
   position: relative;
-  z-index: 2;
-  max-width: 600px;
+  display: inline-block;
+  background: rgba(26, 82, 118, 0.9);
+  color: var(--yellow);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(26, 82, 118, 0.5);
+  animation: slideDown 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 #hero h1 {
+  position: relative;
   font-family: 'Libre Baskerville', serif;
-  font-size: 2.2rem;
-  color: #1c1005;
+  color: #fff;
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  line-height: 1.25;
+  margin-bottom: 12px;
+  max-width: 700px;
   font-weight: 700;
-  margin-bottom: 16px;
-  line-height: 1.2;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
 }
 
-#hero p {
-  font-size: 1.05rem;
-  color: rgba(28, 16, 5, 0.85);
-  line-height: 1.5;
-  margin-bottom: 24px;
+#hero h1 em {
+  color: var(--white);
+  font-style: italic;
+  font-weight: 700;
 }
 
-#hero a {
-  display: inline-block;
-  background: var(--red);
-  color: white;
-  padding: 12px 28px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.2s;
+#hero .hero-sub {
+  position: relative;
+  color: rgba(255, 255, 255, 0.75);
   font-size: 0.95rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  margin-bottom: 40px;
+  max-width: 650px;
+  line-height: 1.6;
+  animation: slideDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
 }
 
-#hero a:hover {
-  background: var(--red-lt);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+.hero-authors {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both;
 }
+
+.hero-authors .avatar-group {
+  display: flex;
+}
+
+.hero-authors .avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(26, 82, 118, 0.9);
+  border: 2px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-left: -10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.hero-authors .avatar:first-child {
+  margin-left: 0;
+}
+
+.hero-authors .avatar:nth-child(2) {
+  background: rgba(192, 57, 43, 0.9);
+  color: #fff;
+}
+
+.hero-authors .author-names {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+  font-weight: 500;
+}
+
 
 /* ══════════════════════════════════════════
-   MAIN CONTENT
+   CONTENIDO
 ══════════════════════════════════════════ */
 main {
-  display: none;
-  margin-left: 0;
-  padding-top: 64px;
+  position: relative;
+  z-index: 10;
 }
 
-.toc {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 24px;
-  margin: 40px 0;
-  max-width: 100%;
-}
-
-.toc h2 {
-  font-size: 1.2rem;
-  color: var(--text);
-  margin-bottom: 16px;
-  font-family: 'Libre Baskerville', serif;
-}
-
-.toc ul { list-style: none; margin: 0; padding: 0; }
-.toc li { margin: 8px 0; }
-.toc a {
-  color: var(--blue);
-  text-decoration: none;
-  transition: all 0.2s;
-  font-size: 0.95rem;
-}
-.toc a:hover { color: var(--blue-md); text-decoration: underline; }
-
-#content-area {
+.content-area {
   max-width: 900px;
   margin: 0 auto;
-  padding: 40px;
+  padding: 60px 40px;
+  background: linear-gradient(180deg, var(--off-white) 0%, #faf8f3 100%);
 }
 
+/* SECCIONES */
 .section-block {
-  margin-bottom: 56px;
+  background: var(--white);
+  border-radius: 14px;
+  padding: 50px;
+  margin-bottom: 50px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.section-block::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--blue) 0%, var(--yellow-dk) 50%, var(--red) 100%);
+}
+
+.section-block::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212, 160, 23, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.section-block:hover {
+  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.12);
+  transform: translateY(-6px);
 }
 
 .section-block h2 {
   font-family: 'Libre Baskerville', serif;
-  font-size: 1.8rem;
-  color: var(--text);
-  margin: 40px 0 20px;
-  padding-bottom: 12px;
-  border-bottom: 3px solid var(--yellow-md);
+  font-size: clamp(1.8rem, 2.5vw, 2.3rem);
+  color: var(--blue);
   font-weight: 700;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 3px solid var(--yellow-lt);
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-block h2::before {
+  content: '◆';
+  color: var(--red);
+  font-size: 1.2rem;
+  flex-shrink: 0;
 }
 
 .section-block h3 {
   font-family: 'Libre Baskerville', serif;
-  font-size: 1.3rem;
-  color: var(--text);
-  margin: 24px 0 12px;
+  font-size: 1.25rem;
+  color: var(--blue-md);
   font-weight: 700;
+  margin: 36px 0 16px;
+  padding-left: 18px;
+  border-left: 5px solid var(--yellow-md);
 }
 
 .section-block p {
-  line-height: 1.7;
   color: var(--text);
-  margin-bottom: 16px;
-  font-size: 1rem;
+  line-height: 1.9;
+  font-size: 1.02rem;
+  margin-bottom: 18px;
+  text-align: justify;
+  font-weight: 400;
 }
 
-.section-block strong { color: var(--blue-md); font-weight: 600; }
+.section-block p strong {
+  color: var(--blue);
+  font-weight: 600;
+}
 
+.section-block ol, .section-block ul {
+  margin-left: 25px;
+  margin-bottom: 18px;
+}
+
+.section-block li {
+  margin-bottom: 10px;
+  line-height: 1.8;
+}
+
+/* CAJAS DE INFORMACIÓN */
+.info-box {
+  background: linear-gradient(135deg, rgba(212, 160, 23, 0.1) 0%, rgba(26, 82, 118, 0.05) 100%);
+  border-left: 5px solid var(--yellow-dk);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 25px 0;
+  color: var(--text);
+  line-height: 1.8;
+  font-size: 1.02rem;
+}
+
+.info-box strong {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+/* IMÁGENES CON EFECTO MEJORADO */
 .section-block img {
+  width: 100%;
   max-width: 100%;
   height: auto;
-  margin: 24px 0;
-  border-radius: 8px;
+  margin: 35px 0;
+  display: block;
+  border-radius: 10px;
+  border: 2px solid var(--border);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   cursor: pointer;
-  transition: all 0.2s;
-  border: 1px solid var(--border);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+  opacity: 0.98;
 }
 
 .section-block img:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+  transform: scale(1.03);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+  opacity: 1;
 }
 
-.info-box {
-  background: var(--blue-lt);
-  border-left: 4px solid var(--blue);
-  padding: 16px;
-  border-radius: 6px;
-  margin: 20px 0;
+.placeholder-image {
+  background: linear-gradient(135deg, #e8e8e8, #f5f5f5);
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--muted);
+  font-style: italic;
+  margin: 35px 0;
   font-size: 0.95rem;
-  color: var(--blue);
 }
-
-.info-box strong { color: var(--blue); }
 
 /* ══════════════════════════════════════════
    ANIMACIONES
@@ -458,10 +525,22 @@ main {
   }
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .animate {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transform: translateY(25px);
+  transition: opacity 0.7s cubic-bezier(0.23, 1, 0.320, 1),
+              transform 0.7s cubic-bezier(0.23, 1, 0.320, 1);
 }
 
 .animate.show {
@@ -469,250 +548,444 @@ main {
   transform: translateY(0);
 }
 
+.section-block .animate {
+  animation: fadeInUp 0.7s ease-out forwards;
+}
+
+.section-block .animate:nth-child(n+2) {
+  animation-delay: 0.1s;
+}
+
+.section-block .animate:nth-child(n+3) {
+  animation-delay: 0.2s;
+}
+
+.section-block .animate:nth-child(n+4) {
+  animation-delay: 0.3s;
+}
+
 /* ══════════════════════════════════════════
-   MODAL
+   MODAL IMAGEN
 ══════════════════════════════════════════ */
 #img-modal {
   display: none;
   position: fixed;
-  z-index: 800;
-  padding: 40px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.85);
-  text-align: center;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(10, 58, 92, 0.95) 0%, rgba(0, 0, 0, 0.9) 100%);
+  z-index: 500;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 24px;
+  cursor: pointer;
+  animation: fadeIn 0.3s ease-out;
+  backdrop-filter: blur(4px);
 }
 
-#img-modal.show { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+#img-modal.show {
+  display: flex;
+}
 
 #img-modal img {
-  max-height: 80vh;
   max-width: 90vw;
-  border-radius: 8px;
-  margin-bottom: 16px;
-  object-fit: contain;
+  max-height: 75vh;
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+  cursor: default;
+  animation: zoomIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 2px solid rgba(212, 160, 23, 0.3);
 }
 
 #img-modal p {
-  color: white;
+  color: rgba(253, 252, 250, 0.85);
+  margin-top: 20px;
   font-size: 0.95rem;
-  max-width: 600px;
-}
-
-.close-modal {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 40px;
-  font-weight: bold;
-  color: white;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.close-modal:hover { color: var(--yellow-md); }
-
-footer {
-  padding: 40px;
   text-align: center;
-  color: var(--muted);
-  font-size: 0.9rem;
-  background: var(--white);
-  border-top: 1px solid var(--border);
-  display: none;
+  max-width: 700px;
+  line-height: 1.6;
+  animation: slideUp 0.4s ease-out 0.1s both;
 }
+
+#img-modal .close-modal {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  color: rgba(253, 252, 250, 0.8);
+  font-size: 2.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 300;
+  line-height: 1;
+}
+
+#img-modal .close-modal:hover {
+  color: #d4a017;
+  transform: rotate(90deg);
+}
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+footer {
+  background: var(--text);
+  color: rgba(255,255,255,0.35);
+  font-size: 0.72rem;
+  text-align: center;
+  padding: 20px 40px;
+  letter-spacing: 0.04em;
+}
+footer a { color: var(--yellow); text-decoration: none; }
 
 /* ══════════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════════ */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  #navbar nav { display: none; }
   #menu-toggle { display: flex; }
-  #navbar { padding: 0 16px; }
-  #navbar nav { flex-wrap: wrap; gap: 4px; }
-  #sidebar { display: flex; }
-  #hero { padding: 40px 24px 32px; }
-  #hero h1 { font-size: 1.6rem; }
-  #hero p { font-size: 1rem; }
-  #content-area { padding: 24px 16px; }
-  .section-block h2 { font-size: 1.4rem; }
-  .section-block h3 { font-size: 1.1rem; }
-  main { margin-left: 0; }
+  #navbar { padding: 0 20px; }
+  .content-area { padding: 32px 20px 56px; }
+  #hero { padding: 44px 20px 36px; }
+  #hero h1 { font-size: clamp(1.4rem, 5vw, 1.8rem); }
+  .section-block { padding: 30px; }
+}
+
+@media (min-width: 901px) {
+  #sidebar, #overlay { display: none !important; }
 }
 
 </style>
 </head>
-
 <body>
 
 <div id="progress"></div>
 
-<!-- ══════════ LOGIN SCREEN ══════════ -->
-<div id="login-screen">
-  <div class="login-card">
-    <img src="https://www.uach.mx/assets/img/logo-uach.png" alt="UACH" style="width: 120px; margin-bottom: 20px;">
-    <h2>Acceso Restringido</h2>
-    <p style="color: var(--muted); margin-bottom: 25px; font-size: 0.95rem;">
-      Este material es propiedad de la <strong>UACH</strong>. Por favor, inicia sesión con tu correo institucional para continuar.
-    </p>
-    <div id="buttonDiv" style="display: flex; justify-content: center;"></div>
-  </div>
-</div>
-
 <!-- ══════════ NAVBAR ══════════ -->
-<nav id="navbar">
-  <a href="#" class="brand">
+<header id="navbar">
+  <a href="index.html" class="brand">
     Museo de Embriología
-    <span>UACH</span>
+    <span>UACH · FACULTAD DE MEDICINA Y CIENCIAS BIOMEDICAS</span>
   </a>
-  <button id="menu-toggle">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
   <nav>
-    <a href="#inicio" class="back">Inicio</a>
-    <a href="https://ejemplo-embrio-ar.com" target="_blank" style="color: var(--red); border: 2px solid var(--red); font-weight: 600;">🔍 EMBRIO AR</a>
+    <a href="#espermatogenesis">Espermatogénesis</a>
+    <a href="#ovogenesis">Ovogénesis</a>
+    <a href="#fertilizacion">Fertilización</a>
+    <a href="#semana1">Semana 1</a>
+    <a href="#semana2">Semana 2</a>
+    <a href="#semana6">Semana 6</a>
+    <a href="#semana7">Semana 7</a>
+    <a href="#semana8">Semana 8</a>
+    <a href="#semana9">Semana 9</a>
+    <a href="#semana9">EMBRIO AR</a>
+    <a href="index.html" class="back">← Volver al inicio</a>
   </nav>
-</nav>
+  <button id="menu-toggle" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+</header>
 
 <!-- ══════════ SIDEBAR MÓVIL ══════════ -->
-<div id="overlay"></div>
 <div id="sidebar">
   <div class="sb-brand">
-    <h2>Contenido</h2>
-    <span>Museo de Embriología</span>
+    <h2>Museo de Embriología</h2>
+    <span>UACH · Facultad de Medicina</span>
   </div>
   <nav>
-    <a href="#inicio" class="sb-back">← Volver arriba</a>
-    <a href="#semana1">Primera Semana</a>
-    <a href="#semana2">Segunda Semana</a>
-    <a href="#semana3">Tercera Semana</a>
-    <a href="#semana4">Cuarta Semana</a>
-    <a href="#semana5">Quinta Semana</a>
-    <a href="#semana6">Sexta Semana</a>
-    <a href="#semana7">Séptima Semana</a>
-    <a href="#semana8">Octava Semana</a>
-    <a href="#semana9">Novena Semana</a>
-    <a href="https://ejemplo-embrio-ar.com" target="_blank" style="color: var(--red); border-top: 2px solid var(--border); margin-top: auto; padding-top: 16px;">🔍 EMBRIO AR</a>
+    <a href="#espermatogenesis">Espermatogénesis</a>
+    <a href="#ovogenesis">Ovogénesis</a>
+    <a href="#fertilizacion">Fertilización</a>
+    <a href="#semana1">Primera semana</a>
+    <a href="#semana2">Segunda semana</a>
+    <a href="#semana5">Quinta semana</a>
+    <a href="#semana6">Sexta semana</a>
+    <a href="#semana7">Séptima semana</a>
+    <a href="#semana8">Octava semana</a>
+    <a href="#semana9">Novena semana</a>
+    <a href="#semana9">EMBRIO AR</a>
+    <a href="index.html" class="sb-back">← Volver al inicio</a>
   </nav>
 </div>
+<div id="overlay"></div>
 
-<!-- ══════════ HERO ══════════ -->
-<div id="hero">
-  <div class="hero-content">
-    <h1>Desarrollo Embrionario</h1>
-    <p>Conoce el increíble proceso de formación de la vida humana durante los primeros 60 días de desarrollo.</p>
-  </div>
-</div>
-
-<!-- ══════════ CONTENIDO PRINCIPAL ══════════ -->
 <main id="main">
-  <div id="content-area">
 
-    <!-- Tabla de Contenidos -->
-    <div class="toc animate">
-      <h2>📑 Tabla de Contenidos</h2>
-      <ul>
-        <li><a href="#semana1">Primera Semana del Desarrollo</a></li>
-        <li><a href="#semana2">Segunda Semana del Desarrollo</a></li>
-        <li><a href="#semana3">Tercera Semana del Desarrollo</a></li>
-        <li><a href="#semana4">Cuarta Semana del Desarrollo</a></li>
-        <li><a href="#semana5">Quinta Semana del Desarrollo</a></li>
-        <li><a href="#semana6">Sexta Semana del Desarrollo</a></li>
-        <li><a href="#semana7">Séptima Semana del Desarrollo</a></li>
-        <li><a href="#semana8">Octava Semana del Desarrollo</a></li>
-        <li><a href="#semana9">Novena Semana del Desarrollo</a></li>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-tag">Material educativo · UACH</div>
+    <h1>Guión del museo para estudiantes del área de la salud</h1>
+    <p class="hero-sub">Recurso de apoyo para comprender los fundamentos de la gametogénesis y la fertilización humana.</p>
+    <div class="hero-authors">
+      <div class="avatar-group">
+        <div class="avatar">JR</div>
+        <div class="avatar">FM</div>
+      </div>
+      <div class="author-names">
+        Jorge Eduardo Rivera Parra<br>
+        María Fernanda Maldonado Gurrola
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENIDO -->
+  <div class="content-area">
+
+    <!-- Espermatogénesis -->
+    <div class="section-block" id="espermatogenesis">
+      <h2 class="animate">Espermatogénesis</h2>
+      
+      <p class="animate">
+        Es un proceso guiado por un sistema hormonal en el que se forman espermatozoides a partir de las células llamadas espermatogonias, a través de diferenciación citológica y meiosis, proceso que consiste en dividir el material genético de una célula diploide en 4 células haploides.
+      </p>
+      
+      <p class="animate">
+        <strong>El proceso consiste en 3 fases (Fig. 1-1):</strong>
+      </p>
+      
+      <ol class="animate">
+        <li><strong>La fase espermatogénica o mitótica:</strong> las espermatogonias (células diploides) se multiplican por mitosis y posteriormente se diferencian a espermatocitos primarios.</li>
+        <li><strong>La fase espermatocitica o meiótica:</strong> el espermatocito primario se divide a través de la meiosis I, formando 2 espermatocitos secundarios y estos a su vez se dividen en la meiosis II, en 4 espermátides, total de células hijas por cada espermatocito primario.</li>
+        <li><strong>Espermiogénesis:</strong> las espermátides sufren una remodelación celular extensa para formar acrosoma, flagelo, vaina mitocondrial y una reducción del citoplasma, para salir a la luz del túbulo seminífero.</li>
+      </ol>
+
+      <div class="placeholder-image animate">
+        📊 Figura 1-1. Espermatogénesis
+      </div>
+      
+      <p class="animate">
+        La producción de hormonas es necesaria para que se lleve a cabo la espermatogénesis, comienza a nivel del hipotálamo con la producción de hormona liberadora gonadotropina (GnRH), viaja a través del sistema porta hipotálamo-hipofisiario a la hipófisis, quien, tras ser estimulada por la GnRH, produce la <strong>hormona folículo estimulante (FSH)</strong> y la <strong>hormona luteinizante (LH).</strong>
+      </p>
+      
+      <p class="animate">
+        Estas dos hormonas viajan por la sangre, hasta llegar a los testículos donde la hormona folículo estimulante (también llamada hormona estimulante de la espermatogénesis), actúa sobre las células sustentaculares (Sertoli) para que secreten inhibina y conviertan estrógenos en testosterona.
+      </p>
+
+      <p class="animate">
+        La hormona luteinizante (también llamada hormona estimulante de las células intersticiales), estimula a las células intersticiales (Leydig) para producir testosterona, necesaria para la espermatogénesis.
+      </p>
+
+      <div class="placeholder-image animate">
+        📊 Figura 1-2. Sistema reproductor masculino. a) Testículos, b) Epidídimo
+      </div>
+
+      <p class="animate">
+        Una vez los espermatozoides alcanzan la luz de los túbulos seminíferos, son transportados gracias a contracciones musculares de los túbulos hacia el epidídimo donde sufren cambios bioquímicos y físicos, necesarios para su movilidad, un proceso llamado <strong>"maduración"</strong> de aproximadamente 14 días. La falta de este proceso disminuye la capacidad de fertilizar de un <strong>80% a 7%.</strong>
+      </p>
+    </div>
+
+    <!-- Ovogénesis -->
+    <div class="section-block" id="ovogenesis">
+      <h2 class="animate">Ovogénesis</h2>
+      
+      <p class="animate">
+        Es un proceso que ocurre en los ovarios, consiste en la diferenciación de las <strong>células germinales primordiales (CGP)</strong> a ovocitos secundarios capaces de ser fertilizados. Durante el periodo prenatal las CGP migran hacia las crestas gonadales donde se transforman en ovogonias. A partir de este momento, entran en un intenso período de actividad mitótica, ocurre del segundo al quinto mes de vida intrauterina.
+      </p>
+
+      <div class="info-box animate">
+        <strong>Cifras importantes:</strong> Durante este tiempo la población aumenta hasta 7,000,000 de ovogonias, para el séptimo mes disminuye hasta 2,000,000 por atresia. Las que sobreviven se diferencian en ovocitos primarios, cada uno tiene 46 cromosomas.
+      </div>
+
+      <p class="animate">
+        Estos ovocitos primarios entran en la primera división meiótica y se detienen en la fase de diploteno de la profase I, hasta el inicio de la pubertad, esto implica la reactivación del eje hipotálamo-hipofisario-gonadal. Cada ovocito primario está rodeado por una capa de células foliculares, este conjunto es denominado <strong>folículo primordial.</strong>
+      </p>
+
+      <p class="animate">
+        Cada 28-30 días durante la edad fértil de una mujer, una colonia conformada por 10-30 ovocitos primarios reanudan su crecimiento folicular. Las células foliculares aumentan de tamaño y formarán los folículos primarios. Conforme avanzan los días del ciclo menstrual, los folículos siguen aumentando de tamaño por la acción de la hormona foliculoestimulante y pasan de folículo primario a secundario.
+      </p>
+
+      <p class="animate">
+        El folículo secundario está conformado por:
+      </p>
+      <ul class="animate">
+        <li>Las tecas (interna muy vascularizada y externa fibrosa)</li>
+        <li>La corona radiada (formada por células foliculares)</li>
+        <li>La zona pelúcida</li>
+        <li>El antro</li>
       </ul>
+
+      <p class="animate">
+        Finalmente, solo un folículo de la colonia seguirá creciendo y se convertirá en <strong>folículo terciario o maduro.</strong> Este contiene un ovocito primario, rodeado por la corona radiada, permanece suspendido en el antro (que ahora es de gran tamaño) por un grupo de células foliculares denominadas cúmulo ooforo. Solo un folículo terciario de la colonia llega a ser el folículo dominante.
+      </p>
+
+      <div class="placeholder-image animate">
+        📊 Figura 2-1. Ciclo ovárico. a) Folículo primario, b) Folículo secundario, c) Folículo maduro, d) Ovocito secundario liberado, e) Cuerpo hemorrágico, f) Cuerpo lúteo, g) Cuerpo albicans
+      </div>
+
+      <p class="animate">
+        Entre 10 a 12 horas antes de la ovulación, ocurre una descarga de hormona luteinizante, provocando una protrusión de la pared del ovario, conocida como estigma, que sufrirá isquemia para que ocurra la ovulación. En este momento el ovocito primario que se encuentra en el interior del folículo maduro reanuda la primera división meiótica (detenida en diploteno), dividiéndose en dos células hijas: el <strong>ovocito secundario</strong> y el <strong>primer corpúsculo polar</strong>, ambas células tienen 23 cromosomas.
+      </p>
+
+      <p class="animate">
+        El pico de hormona luteinizante, en conjunto con la foliculoestimulante provocan la rotura del estigma y expulsión del ovocito secundario, que sale rodeado por la zona pelúcida y la corona radiada. Este proceso se denomina <strong>ovulación.</strong> Ambas células entran en la segunda división meiótica y se detienen en metafase II hasta que el ovocito sea fertilizado.
+      </p>
+
+      <p class="animate">
+        En el ovario el folículo roto se llena de sangre procedente de la teca interna, formando un <strong>cuerpo hemorrágico.</strong> Posteriormente sus paredes y las tecas del folículo maduro se colapsan e inducen la formación del <strong>cuerpo lúteo</strong> que segrega progesterona y estrógenos en menor cantidad.
+      </p>
+    </div>
+
+    <!-- Fertilización -->
+    <div class="section-block" id="fertilizacion">
+      <h2 class="animate">Fertilización</h2>
+      
+      <p class="animate">
+        La fertilización es el proceso de unión de un espermatozoide maduro y capacitado con un ovocito secundario para dar lugar a una célula diploide denominada <strong>cigoto,</strong> que entra en mitosis y se dan dos blastómeros hijos, que continuarán dividiéndose para formar una mórula, y después un blastocisto, posteriormente gástrula, y finalmente tendremos un embrión/feto.
+      </p>
+
+      <h3 id="transporte-ovocito" class="animate">Transporte del ovocito</h3>
+      
+      <p class="animate">
+        Una vez liberado el ovocito maduro del folículo terciario, es captado por las fimbrias, lo lleva a la tuba uterina, por contracciones del músculo liso, esto se realiza gracias a las altas concentraciones de estrógenos.
+      </p>
+
+      <div class="placeholder-image animate">
+        📊 Figura 3-1. Desarrollo folicular en el ovario, ovulación, fecundación y transporte del embrión en sus primeras etapas del desarrollo por la tuba uterina hacia el útero
+      </div>
+
+      <h3 id="transporte-espermatozoides" class="animate">Transporte de los espermatozoides</h3>
+      
+      <p class="animate">
+        Una vez formados los espermatozoides, son transportados por el músculo liso de los túbulos, van de la luz de los túbulos seminíferos, hacia los rectos, red testicular, conductos eferentes, luego se trasladan hacia el epidídimo. Aquí llevan a cabo la maduración que durará aproximadamente 14 días, necesaria para darles movilidad a los espermatozoides.
+      </p>
+
+      <div class="placeholder-image animate">
+        📊 Figura 3-2. Corte sagital del testículo
+      </div>
+
+      <p class="animate">
+        Durante el orgasmo, el hombre eyacula el semen, que contiene espermatozoides. Estos son transportados del epidídimo hacia el conducto deferente, eyaculador, uretra prostática, continuando por el resto de la uretra y salen del pene junto con el líquido seminal.
+      </p>
+
+      <div class="info-box animate">
+        <strong>Dato importante:</strong> El líquido seminal no contiene espermatozoides, está conformado por fructosa, prostaglandinas, ácido cítrico, fosfatasa ácida y algunos minerales. Este se forma en las vesículas seminales, próstata y glándulas bulbouretrales.
+      </div>
+
+      <div class="placeholder-image animate">
+        📊 Figura 3-3. Transporte de los espermatozoides en el sistema reproductor masculino
+      </div>
+
+      <p class="animate">
+        Una vez que el semen (espermatozoides y líquido seminal) es depositado en la vagina por una eyaculación, los espermatozoides continúan su trayecto hacia la ampolla de la tuba uterina, siendo este el sitio más frecuente de fertilización, donde se encontrarán con el ovocito maduro.
+      </p>
+
+      <p class="animate">
+        Cuando los espermatozoides se depositan en vagina, se van a capacitar en su trayecto hasta la ampolla tubárica. Este proceso ocurre gracias al pH ácido de la vagina, donde ocurre una modificación física de la superficie celular del espermatozoide, provocando:
+      </p>
+      <ol class="animate">
+        <li>Aumento de la movilidad espermática</li>
+        <li>Reconocimiento y adhesión con la zona pelúcida</li>
+        <li>Exocitosis de su contenido acrosómico</li>
+      </ol>
+
+      <h3 id="detalle-fertilizacion" class="animate">El Acto de Fertilización</h3>
+
+      <p class="animate">
+        Cuando los espermatozoides penetran la corona radiada entran en contacto con la zona pelúcida. Esta es una capa compuesta de 4 glicoproteínas: <strong>ZP1, ZP2, ZP3 y ZP4,</strong> su función es evitar la polispermia. Una vez están en contacto los espermatozoides con la zona pelúcida, ZP3 funcionará como receptor de unión con el acrosoma, mientras que, ZP2 actúa como receptor secundario.
+      </p>
+
+      <p class="animate">
+        La unión de ZP3 y ZP4 inducirá la reacción acrosómica del espermatozoide, lo que significa que hay exocitosis de enzimas del contenido acrosomal como: acrosina (enzima que rompe los componentes de la zona pelúcida), hialuronidasa, fosfatasa ácida, β-glucosidasa, entre otras. Esto permite la penetración de la zona pelúcida por los espermatozoides.
+      </p>
+
+      <div class="placeholder-image animate">
+        📊 Figura 3-4. Interacción de ovocito y espermatozoide. a) Corona radiada, b) Zona pelúcida, c) Espacio perivitelino, d) Plasmalema del ovocito, e) Gránulos corticales
+      </div>
+
+      <p class="animate">
+        Una vez el espermatozoide penetra la zona pelúcida, entra al espacio perivitelino, y el más rápido se pone en contacto con el plasmalema del ovocito. Para este momento, el acrosoma del espermatozoide ya ha utilizado el tercio anterior de su membrana plasmática y la membrana acrosómica interna, persistiendo la membrana postacrosómica en la parte posterior de la cabeza.
+      </p>
+
+      <p class="animate">
+        En esta membrana se encuentra la <strong>fertilina,</strong> molécula que fusiona las membranas plasmáticas de los gametos y permite que se introduzca el contenido del espermatozoide (núcleo, centriolos proximal y distal, el flagelo y las mitocondrias). Las mitocondrias paternas degeneran posteriormente, si persisten se da una condición llamada <strong>heteroplasmia,</strong> afectando los tejidos con alta demanda metabólica (cardiomiopatías). Una vez que el pronúcleo masculino se encuentra dentro del ovocito, se unirá con el pronúcleo del ovocito y forman un cigoto.
+      </p>
+
+      <p class="animate">
+        En el momento que se pone en contacto la membrana postacrosómica del espermatozoide con el plasmalema del ovocito, esta se despolariza, lo que desencadena la reanudación de la segunda fase de meiosis del ovocito y segundo cuerpo polar, quienes estaban detenidos en metafase II. A la vez se liberan los gránulos corticales del ovocito para inactivar los receptores ZP2 y ZP3, a este proceso se le llama <strong>reacción cortical o de zona.</strong>
+      </p>
     </div>
 
     <!-- Primera Semana -->
     <div class="section-block" id="semana1">
-      <h2 class="animate">Primera Semana del Desarrollo</h2>
-
+      <h2 class="animate">Primera Semana del Desarrollo Humano</h2>
+      
       <p class="animate">
-        La vida comienza cuando el ovocito secundario es fertilizado por el espermatozoide en la ampolla de la tuba uterina. Esta fusión celular forma una célula diplóide llamada <strong>cigoto</strong>, que luego entra en mitosis. Durante esta semana, el cigoto se divide generando dos blastómeros hijos que continuarán dividiéndose, formando primero una <strong>mórula</strong> (palabra que significa pequeña mora) y posteriormente un <strong>blastocisto</strong>.
+        Una vez concluida la fertilización, el cigoto experimenta cambios metabólicos y comienza el período de segmentación, un proceso de divisiones mitóticas que son holoblásticas (totales o completas), asimétricas y asincrónicas, que duran entre 3 a 4 días.
       </p>
 
       <p class="animate">
-        En los próximos 3 a 4 días después de la fertilización, el embrión viaja desde la ampolla de la tuba uterina hacia la cavidad uterina mediante el movimiento del músculo liso tubárico y el movimiento de los cilios que recubren el interior de la tuba. Durante este trayecto, continúa la división celular por mitosis. 
+        De la primera división se obtienen 2 células denominadas <strong>blastómeras.</strong> Estas células se dividen nuevamente, a partir de este momento la segmentación es asincrónica. El embrión puede estar conformado por 3, 4, 5, o 6 células o más, en conjunto representan el mismo tamaño que tenía el cigoto y conservan su <strong>totipotencialidad</strong> (capacidad de formar un individuo completo).
+      </p>
+
+      <div class="placeholder-image animate">
+        📊 Figura 4-1. Segmentación y desarrollo temprano del embrión
+      </div>
+
+      <p class="animate">
+        Mientras ocurre la segmentación, el embrión es desplazado por contracciones musculares de las tubas uterinas en dirección al útero. Aún se encuentra dentro de la zona pelúcida, quien se encarga de proteger sus blastómeras del rozamiento con las paredes de la tuba uterina, para evitar que el embrión se implante en este lugar.
       </p>
 
       <p class="animate">
-        Cuando el blastocisto llega a la cavidad uterina alrededor del día 5-6 después de la fertilización (día 5-6 del desarrollo), el trofoblasto del blastocisto comienza a erosionar el epitelio del endometrio uterino para implantarse. Este evento marca el inicio de la <strong>implantación</strong>, durante la cual el blastocisto se hunde gradualmente en el endometrio y se establece la conexión entre el embrión y la madre.
+        Después de que el embrión alcanza el estadio de 8 células, ocurre una restricción en su potencialidad celular. Ahora las blastómeras son <strong>pluripotentes</strong> (capacidad de formar diferentes tipos de células o tejidos, pero no un organismo completo). Cuando se han formado entre 16 y 32 células es la etapa de <strong>mórula</strong> aproximadamente 3 a 4 días después de la fertilización.
       </p>
 
       <p class="animate">
-        Por otra parte, dentro del blastocisto, la masa celular interna (que formará el embrión) se divide en dos capas durante esta semana: el <strong>epiblasto</strong> (en contacto con la cavidad amniótica) y el <strong>hipoblasto</strong> (adyacente a la cavidad del saco vitelino). Estas dos capas formarán el <strong>disco germinativo bilaminar</strong>, que es el verdadero embrión durante la segunda semana.
+        En esta etapa inicia el proceso de <strong>compactación,</strong> donde las blastómeras de la periferia se adhieren íntimamente mediante uniones ocluyentes y desmosomas para formar una estructura compacta perdiendo su identidad individual. Hacia el interior, las blastómeras forman uniones intersticiales o de hendidura que permiten la comunicación, el intercambio de iones y de moléculas pequeñas.
       </p>
+
+      <p class="animate">
+        Al finalizar la compactación, las blastómeras se reacomodan para formar el <strong>blastocisto,</strong> compuesto por el trofoblasto y el embrioblasto. En la parte caudal del embrioblasto se encuentra el blastocele (cavidad del blastocisto).
+      </p>
+
+      <p class="animate">
+        El blastocisto sigue con su tamaño igual al cigoto mientras está dentro de la zona pelúcida. Aproximadamente en el día 5±1, llega a la cavidad uterina, donde flotará en las secreciones uterinas por 1 o 2 días. A partir del día 7±1, inicia la <strong>implantación,</strong> que consiste en la adhesión del blastocisto al epitelio endometrial.
+      </p>
+
+      <div class="info-box animate">
+        <strong>Proceso de implantación:</strong> La L-selectina de las células trofoblásticas y los receptores de carbohidratos ubicados en las células epiteliales del endometrio permiten esta unión. Como consecuencia el blastocisto se introduce en la capa funcional (capa compacta y parte de la esponjosa) del endometrio.
+      </div>
     </div>
 
     <!-- Segunda Semana -->
     <div class="section-block" id="semana2">
-      <h2 class="animate">Segunda Semana del Desarrollo</h2>
+      <h2 class="animate">Segunda Semana del Desarrollo Humano</h2>
+      
+      <p class="animate">
+        Alrededor del día 8±1, la mayor parte del blastocisto estará interiorizado en el tejido endometrial. El sincitiotrofoblasto rompe el estroma endometrial, formando lagunas de sangre materna que sirven de nutrición al embrión. El trofoblasto será cubierto en su totalidad por el epitelio endometrial aproximadamente al día 12±1.
+      </p>
+
+      <div class="info-box animate">
+        <strong>Reacción decidual:</strong> Una edematización de todo el estroma endometrial que acumula glucógeno y lípidos para detener la penetración del sincitiotrofoblasto. Sirve para nutrir al embrión en etapas tempranas y propicia un ambiente de protección contra el sistema inmune materno.
+      </div>
 
       <p class="animate">
-        Durante esta semana, continúa la implantación que había iniciado en los últimos días de la primera semana. El trofoblasto se diferencia en dos capas: el <strong>citotrofoblasto</strong> (capa de células cúbicas mononucleadas) y el <strong>sincitiotrofoblasto</strong> (masa multinucleada que erosiona activamente el endometrio).
+        Mientras ocurre la implantación, las células del embrioblasto se reorganizan y forman el <strong>embrión bilaminar.</strong> El epiblasto es una capa gruesa con células cilíndricas que forman el piso de la cavidad amniótica. El hipoblasto es una capa de células cuboideas que forma el techo del blastocele, el futuro saco vitelino.
       </p>
 
       <p class="animate">
-        A partir del epiblasto se forma la cavidad amniótica por separación de células que formarán el <strong>amnios</strong>. Conforme el amnios rodea más células, se forma un <strong>saco amniótico</strong>. Dentro del amnios queda alojado el disco germinativo bilaminar. El hipoblasto, a su vez, forma el techo del saco vitelino primitivo. Entre el saco vitelino y el citotrofoblasto se forma una región llamada <strong>mesoderma extraembrionario</strong>, que se divide en dos capas con características diferentes: el mesodermo somático (próximo al citotrofoblasto) y el mesodermo visceral (próximo al hipoblasto y saco vitelino).
+        A partir del embrioblasto se diferencian unas células llamadas <strong>amnioblastos,</strong> secretarán líquido amniótico en la cavidad amniótica, formada entre el epiblasto y citotrofoblasto. Por otro lado, las células del hipoblasto (endodermo extraembrionario) migrarán y revestirán el blastocele formando así el <strong>saco vitelino primitivo.</strong>
       </p>
 
       <p class="animate">
+        En este momento aparece el <strong>mesodermo extraembrionario,</strong> que se forma entre el citotrofoblasto por fuera y rodea por dentro al saco vitelino primitivo y la cavidad amniótica. Este mesodermo rápidamente prolifera, después se le forman espacios que confluyen y forman el <strong>celoma extraembrionario.</strong>
+      </p>
+
+      <div class="placeholder-image animate">
         📊 Figura 5-1 y 5-2. Embrión durante la segunda semana y formación del celoma extraembrionario
-      </p>
-
-      <p class="animate">
-        A la vez que todo ese proceso sucede, en el hipoblasto ocurre una segunda migración de células, provocando que el saco vitelino primitivo se divida en 2 partes: una relacionada con el hipoblasto llamada <strong>saco vitelino secundario o definitivo</strong> y un remanente del saco vitelino primitivo que en días posteriores desaparecerá.
-      </p>
-    </div>
-
-    <!-- Tercera Semana -->
-    <div class="section-block" id="semana3">
-      <h2 class="animate">Tercera Semana del Desarrollo</h2>
-
-      <p class="animate">
-        Es la semana de la <strong>gastrulación</strong>. Durante este proceso crucial, el disco germinativo bilaminar se transforma en un disco trilaminar (formado por tres capas: ectodermo, mesodermo y endodermo).
-      </p>
-
-      <p class="animate">
-        La gastrulación comienza con la aparición de la <strong>línea primitiva</strong> en el epiblasto. Esta estructura es una depresión alargada en la parte caudal del disco embrionario. Las células epiblásticas migran hacia la línea primitiva, se invaginan (se introducen hacia adentro) y se desplazan cranealmente, reemplazando el hipoblasto y formando el <strong>endodermo primario o definitivo</strong>. Las células que quedan entre el ectodermo (epiblasto que no migró) y el endodermo forman el <strong>mesodermo intraembrionario</strong>.
-      </p>
-
-      <p class="animate">
-        El epiblasto que permanece en la línea primitiva forma el <strong>ectodermo</strong>. De esta manera se forma el disco trilaminar con las tres capas germinativas primitivas.
-      </p>
-
-      <p class="animate">
-        A partir del nódulo primitivo (la porción craneal de la línea primitiva) sale el <strong>proceso notocordal</strong> que migra hacia craneal. Este proceso forma la <strong>notocorda</strong>, que desempeña un papel muy importante inductivo durante el desarrollo embrionario.
-      </p>
-
-      <p class="animate">
-        El mesodermo que rodea la notocorda se condensa y forma los <strong>somitas</strong>, que son estructuras pares y metaméricas. Los somitas se dividen en tres regiones: esclerotoma (que formará las vértebras y costillas), miotoma (que formará los músculos) y dermatoma (que formará la dermis de la piel).
-      </p>
-    </div>
-
-    <!-- Cuarta Semana -->
-    <div class="section-block" id="semana4">
-      <h2 class="animate">Cuarta Semana del Desarrollo</h2>
-
-      <p class="animate">
-        El embrión toma una forma más definida, particularmente por el crecimiento diferencial. Los somitas son prominentes y pueden contarse. Durante esta semana aparecen los <strong>brotes o yemas de los miembros</strong> (superiores e inferiores) como pequenas proyecciones de mesodermo.
-      </p>
-
-      <p class="animate">
-        El tubo neural (formado a partir del ectodermo durante la tercera semana) se diferencia en sus diferentes regiones y aparecen los primeros <strong>arcos faríngeos</strong> alrededor de la faringe. El corazón comienza a formarse y sus tubos cardíacos primitivos se unen, iniciando los primeros latidos. El sistema cardiovascular primitivo comienza a funcionar.
-      </p>
-
-      <p class="animate">
-        Los <strong>somitas cervicales y torácicos</strong> (que rodean la notocorda) se fragmentan dando origen a las vértebras y costillas. La notocorda degenera excepto en el núcleo pulposo del disco intervertebral.
-      </p>
-
-      <p class="animate">
-        📊 Figura 5-1 y 5-2. Embrión durante la segunda semana y formación del celoma extraembrionario
-      </p>
+      </div>
 
       <p class="animate">
         A la vez que todo ese proceso sucede, en el hipoblasto ocurre una segunda migración de células, provocando que el saco vitelino primitivo se divida en 2 partes: una relacionada con el hipoblasto llamada <strong>saco vitelino secundario o definitivo</strong> y un remanente del saco vitelino primitivo que en días posteriores desaparecerá.
@@ -946,54 +1219,6 @@ document.addEventListener('dragstart', (e) => {
   e.preventDefault();
   return false;
 });
-
-/* ── Google Sign-In ── */
-function handleCredentialResponse(response) {
-  // Decodificamos el usuario del token de Google
-  const payload = JSON.parse(atob(response.credential.split('.')[1]));
-  const email = payload.email;
-
-  // RESTRICCIÓN: Solo correos de la UACH
-  if (email.endsWith("@uach.mx")) {
-    document.getElementById('login-screen').classList.add('hidden');
-    document.getElementById('main').style.display = 'block';
-    document.getElementById('navbar').style.display = 'flex';
-    document.getElementById('sidebar').style.display = 'flex';
-    document.getElementById('progress').style.display = 'block';
-    document.getElementById('hero').style.display = 'block';
-    document.getElementById('footer').style.display = 'block';
-    // Guardamos que ya entró para que no pida login al recargar (mientras no cierre pestaña)
-    sessionStorage.setItem('uach_auth', 'true');
-  } else {
-    alert('Acceso denegado. Solo usuarios @uach.mx pueden acceder.');
-  }
-}
-
-window.onload = function () {
-  // Si ya se validó antes, entrar directo
-  if(sessionStorage.getItem('uach_auth') === 'true') {
-    document.getElementById('login-screen').classList.add('hidden');
-    document.getElementById('main').style.display = 'block';
-    document.getElementById('navbar').style.display = 'flex';
-    document.getElementById('sidebar').style.display = 'flex';
-    document.getElementById('progress').style.display = 'block';
-    document.getElementById('hero').style.display = 'block';
-    document.getElementById('footer').style.display = 'block';
-    return;
-  }
-
-  // Inicializar botón de Google
-  google.accounts.id.initialize({
-    client_id: "948887907429-vndjspoauneicam4bi6ic5p5bu80bf5g.apps.googleusercontent.com",
-    callback: handleCredentialResponse,
-    hd: "uach.mx" // Sugiere solo cuentas de la universidad
-  });
-
-  google.accounts.id.renderButton(
-    document.getElementById("buttonDiv"),
-    { theme: "outline", size: "large", text: "signin_with" }
-  );
-};
 
 </script>
 </body>
