@@ -682,15 +682,15 @@ footer a { color: var(--yellow); text-decoration: none; }
 <div id="progress"></div>
 
 <div id="uach-login-container" style="text-align: center; padding: 40px; background: #fdfcfa; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 80px auto; max-width: 400px; display: none;">
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <h3 style="color: #1a5276; font-family: 'Libre Baskerville', serif; margin-bottom: 20px;">Acceso Institucional</h3>
-    <p style="font-family: 'Inter', sans-serif; font-size: 0.9rem; color: #666; margin-bottom: 25px;">Para ver nuestro material para estudiantes del área de la salud, por favor inicia sesión con tu correo institucional UACH.</p>
+    <p style="font-family: 'Inter', sans-serif; font-size: 0.9rem; color: #666; margin-bottom: 25px;">Para ver el guion detallado, por favor inicia sesión con tu cuenta de la UACh.</p>
     
     <div id="g_id_onload"
-        data-client_id="948887907429-vndjspoauneicam4bi6ic5p5bu80bf5g.apps.googleusercontent.com"
-        data-auto_select="false"  data-context="signin"
-        data-ux_mode="popup"
-        data-callback="handleCredentialResponse">
+         data-client_id="948887907429-vndjspoauneicam4bi6ic5p5bu80bf5g.apps.googleusercontent.com"
+         data-context="signin"
+         data-ux_mode="popup"
+         data-callback="handleCredentialResponse"
+         data-auto_prompt="false">
     </div>
 
     <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="signin_with" data-size="large" data-logo_alignment="left"></div>
@@ -699,7 +699,6 @@ footer a { color: var(--yellow); text-decoration: none; }
 <div id="contenido-protegido" style="display: none;">
 
   <header id="navbar">
-
 <!-- ══════════ NAVBAR ══════════ -->
 <header id="navbar">
   <a href="index.html" class="brand">
@@ -1109,7 +1108,7 @@ footer a { color: var(--yellow); text-decoration: none; }
 
   </div><!-- /content-area -->
 </main>
-
+</div> <div id="img-modal" onclick="closeModal()">
 <!-- ══════════ MODAL IMAGEN ══════════ -->
 <div id="img-modal" onclick="closeModal()">
   <span class="close-modal" onclick="closeModal()">×</span>
@@ -1117,8 +1116,9 @@ footer a { color: var(--yellow); text-decoration: none; }
   <p id="modal-caption"></p>
 </div></main>
 
-<footer>
-  <p>© 2025 Museo de Embriología...</p>
+
+</div><footer>
+  <p>© 2025 Museo de Embriología "Dra. Dora Virginia Chávez Corral" · Universidad Autónoma de Chihuahua</p>
 </footer>
 
 <script>
