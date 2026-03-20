@@ -681,24 +681,6 @@ footer a { color: var(--yellow); text-decoration: none; }
 
 <div id="progress"></div>
 
-<div id="uach-login-container" style="text-align: center; padding: 40px; background: #fdfcfa; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 80px auto; max-width: 400px; display: none;">
-    <h3 style="color: #1a5276; font-family: 'Libre Baskerville', serif; margin-bottom: 20px;">Acceso Institucional</h3>
-    <p style="font-family: 'Inter', sans-serif; font-size: 0.9rem; color: #666; margin-bottom: 25px;">Para ver el guion detallado, por favor inicia sesión con tu cuenta de la UACh.</p>
-    
-    <div id="g_id_onload"
-         data-client_id="948887907429-vndjspoauneicam4bi6ic5p5bu80bf5g.apps.googleusercontent.com"
-         data-context="signin"
-         data-ux_mode="popup"
-         data-callback="handleCredentialResponse"
-         data-auto_prompt="false">
-    </div>
-
-    <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="signin_with" data-size="large" data-logo_alignment="left"></div>
-</div>
-
-<div id="contenido-protegido" style="display: none;">
-
-  <header id="navbar">
 <!-- ══════════ NAVBAR ══════════ -->
 <header id="navbar">
   <a href="index.html" class="brand">
@@ -1108,16 +1090,15 @@ footer a { color: var(--yellow); text-decoration: none; }
 
   </div><!-- /content-area -->
 </main>
-</div> <div id="img-modal" onclick="closeModal()">
+
 <!-- ══════════ MODAL IMAGEN ══════════ -->
 <div id="img-modal" onclick="closeModal()">
   <span class="close-modal" onclick="closeModal()">×</span>
   <img id="modal-img" src="" alt="" onclick="event.stopPropagation()">
   <p id="modal-caption"></p>
-</div></main>
+</div>
 
-
-</div><footer>
+<footer>
   <p>© 2025 Museo de Embriología "Dra. Dora Virginia Chávez Corral" · Universidad Autónoma de Chihuahua</p>
 </footer>
 
@@ -1233,66 +1214,6 @@ document.addEventListener('dragstart', (e) => {
   e.preventDefault();
   return false;
 });
-// --- SISTEMA DE SEGURIDAD UACH ---
-
-// Función para decodificar el token de Google
-function parseJwt(token) {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-    return JSON.parse(jsonPayload);
-}
-
-// Manejo de la respuesta de Google
-function handleCredentialResponse(response) {
-    const user = parseJwt(response.credential);
-    
-    if (user.email.endsWith('@uach.mx')) {
-        localStorage.setItem('uach_auth', 'true');
-        localStorage.setItem('uach_user_name', user.given_name);
-        location.reload(); 
-    } else {
-        // Avisamos el error
-        alert("Acceso denegado: Usa tu correo @uach.mx. Tu cuenta actual (" + user.email + ") no es válida.");
-        
-        // Forzamos a Google a desloguearse para que deje elegir otra
-        google.accounts.id.disableAutoSelect();
-        
-        // Opcional: Limpiar rastro por si acaso
-        localStorage.removeItem('uach_auth');
-        
-        // Recargar para que el botón de Google se resetee
-        location.reload();
-    }
-}
-
-//Bloqueo de contenido inmediato
-(function() {
-    const isAuth = localStorage.getItem('uach_auth');
-    
-    // Si NO está autenticado, ocultamos el contenido principal
-    document.addEventListener("DOMContentLoaded", function() {
-        const mainContent = document.getElementById('contenido-protegido'); 
-        const loginBox = document.getElementById('uach-login-container');
-
-        if (isAuth === 'true') {
-            if(mainContent) mainContent.style.display = 'block';
-            if(loginBox) loginBox.style.display = 'none';
-        } else {
-            if(mainContent) mainContent.style.display = 'none';
-            if(loginBox) loginBox.style.display = 'block';
-        }
-    });
-})();
-
-// Función para cerrar sesión
-function cerrarSesionUACH() {
-    localStorage.removeItem('uach_auth');
-    localStorage.removeItem('uach_user_name');
-    location.reload();
-}
 
 </script>
 </body>
