@@ -1236,7 +1236,7 @@ document.addEventListener('dragstart', (e) => {
 });
 // --- SISTEMA DE SEGURIDAD UACH ---
 
-// 1. Función para decodificar el token de Google
+// Función para decodificar el token de Google
 function parseJwt(token) {
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -1246,20 +1246,26 @@ function parseJwt(token) {
     return JSON.parse(jsonPayload);
 }
 
-// 2. Manejo de la respuesta de Google
+// Manejo de la respuesta de Google
 function handleCredentialResponse(response) {
     const user = parseJwt(response.credential);
     
-    // Verificamos el dominio del correo
     if (user.email.endsWith('@uach.mx')) {
         localStorage.setItem('uach_auth', 'true');
         localStorage.setItem('uach_user_name', user.given_name);
-        
-        alert("¡Bienvenido/a, " + user.given_name + "!");
-        location.reload(); // Recargamos para mostrar el contenido
+        location.reload(); 
     } else {
-        alert("Acceso denegado: Debes utilizar tu correo institucional @uach.mx");
+        // Avisamos el error
+        alert("Acceso denegado: Usa tu correo @uach.mx. Tu cuenta actual (" + user.email + ") no es válida.");
+        
+        // Forzamos a Google a desloguearse para que deje elegir otra
         google.accounts.id.disableAutoSelect();
+        
+        // Opcional: Limpiar rastro por si acaso
+        localStorage.removeItem('uach_auth');
+        
+        // Recargar para que el botón de Google se resetee
+        location.reload();
     }
 }
 
