@@ -500,6 +500,12 @@ main {
   font-size: 0.95rem;
 }
 
+.btn-embrio {
+  pointer-events: auto !important; /* Fuerza que reconozca el clic */
+  position: relative;
+  z-index: 100; /* Lo pone por encima de cualquier capa bloqueadora */
+}
+
 /* ══════════════════════════════════════════
    ANIMACIONES
 ══════════════════════════════════════════ */
@@ -691,7 +697,7 @@ footer a { color: var(--yellow); text-decoration: none; }
     <a href="#semana7">Semana 7</a>
     <a href="#semana8">Semana 8</a>
     <a href="#semana9">Semana 9</a>
-    <a href="#semana9">EMBRIO AR</a>
+    <a href="https://museodeembriologia.github.io/Museo-de-Embriologia/" class="btn-embrio" target="_blank">EMBRIO AR</a>
     <a href="index.html" class="back">← Volver al inicio</a>
   </nav>
   <button id="menu-toggle" aria-label="Abrir menú">
@@ -716,7 +722,7 @@ footer a { color: var(--yellow); text-decoration: none; }
     <a href="#semana7">Séptima semana</a>
     <a href="#semana8">Octava semana</a>
     <a href="#semana9">Novena semana</a>
-    <a href="#semana9">EMBRIO AR</a>
+    <a href="https://museodeembriologia.github.io/Museo-de-Embriologia/" class="btn-embrio" target="_blank">EMBRIO AR</a>
     <a href="index.html" class="sb-back">← Volver al inicio</a>
   </nav>
 </div>
@@ -1187,6 +1193,10 @@ document.addEventListener('contextmenu', (e) => {
 
 // Bloquear selección con el mouse
 document.addEventListener('mousedown', (e) => {
+  if (e.target.closest('a')) {
+    return; 
+  }
+
   if (e.detail > 1) { // Detectar doble click
     e.preventDefault();
     return false;
