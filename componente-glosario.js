@@ -53,7 +53,7 @@ glosarioCard.style.cssText = `
 
 document.querySelectorAll('.glosario-link').forEach(enlace => {
   enlace.style.color = '#c0392b'; 
-  enlace.style.borderBottom = '2px dashed #c0392b';
+  enlace.style.borderBottom = '2px solid #c0392b';
   enlace.style.cursor = 'help';
   enlace.style.fontWeight = '700';
   enlace.style.pointerEvents = 'auto'; 
