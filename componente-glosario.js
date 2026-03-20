@@ -28,6 +28,8 @@ const diccionarioEmbriologia = {
   "feto": "Nombre que recibe el nuevo ser a partir de la novena semana, habiendo superado la etapa embrionaria. Ya posee características corporales más definidas."
 };
 
+// ── LÓGICA DEL COMPONENTE UNIVERSAL ──
+
 const glosarioCard = document.createElement('div');
 glosarioCard.id = 'glosario-flotante';
 document.body.appendChild(glosarioCard);
@@ -40,10 +42,10 @@ glosarioCard.style.cssText = `
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
   padding: 15px;
   border-radius: 8px;
-  width: 280px;
+  width: 260px;
   z-index: 9999;
   font-family: 'Nunito', sans-serif;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   line-height: 1.5;
   color: #1c1c1c;
   pointer-events: none;
@@ -54,26 +56,71 @@ document.querySelectorAll('.glosario-link').forEach(enlace => {
   enlace.style.borderBottom = '2px dashed #c0392b';
   enlace.style.cursor = 'help';
   enlace.style.fontWeight = '700';
+  enlace.style.pointerEvents = 'auto'; 
 
-  enlace.addEventListener('mouseenter', (e) => {
+  // Función para actualizar contenido y mostrar
+  const mostrarCard = (e) => {
     const idTermino = enlace.getAttribute('data-id');
     const definicion = diccionarioEmbriologia[idTermino] || "Definición no disponible.";
-    
-    glosarioCard.innerHTML = `<strong style="color: #1a5276; font-size: 0.75rem; text-transform: uppercase; display: block; margin-bottom: 5px; letter-spacing: 0.05em;">Concepto Clave</strong>${definicion}`;
+    glosarioCard.innerHTML = `<strong style="color: #1a5276; font-size: 0.7rem; text-transform: uppercase; display: block; margin-bottom: 5px; letter-spacing: 0.05em;">Concepto Clave</strong>${definicion}`;
     glosarioCard.style.display = 'block';
+    actualizarPosicion(e);
+  };
+
+  // Función exclusiva para calcular la posición (evita colisiones)
+  const actualizarPosicion = (e) => {
+    let mouseX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+    let mouseY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
+
+    const cardWidth = 260;
+    const padding = 20;
+    let finalX = mouseX + 15;
+    let finalY = mouseY + 15;
+
+    // Colisión Derecha
+    if (finalX + cardWidth > window.innerWidth - padding) {
+      finalX = mouseX - cardWidth - 15;
+    }
+    // Colisión Izquierda
+    if (finalX < padding) finalX = padding;
+
+    // Colisión Abajo (ajuste dinámico de altura)
+    const cardHeight = glosarioCard.offsetHeight;
+    if (finalY + cardHeight > window.innerHeight - padding) {
+      finalY = mouseY - cardHeight - 15;
+    }
+
+    glosarioCard.style.left = finalX + 'px';
+    glosarioCard.style.top = finalY + 'px';
+  };
+
+  const ocultarCard = () => {
+    glosarioCard.style.display = 'none';
+  };
+
+  // --- EVENTOS COMPUTADORA (MOUSE) ---
+  enlace.addEventListener('mouseenter', (e) => {
+    mostrarCard(e);
   });
 
   enlace.addEventListener('mousemove', (e) => {
-    let x = e.clientX + 15;
-    let y = e.clientY + 15;
-    if (x + 280 > window.innerWidth) x = e.clientX - 295; 
-    if (y + 100 > window.innerHeight) y = e.clientY - 115; // Evita que se salga por abajo
-    
-    glosarioCard.style.left = x + 'px';
-    glosarioCard.style.top = y + 'px';
+    actualizarPosicion(e);
   });
 
   enlace.addEventListener('mouseleave', () => {
-    glosarioCard.style.display = 'none';
+    ocultarCard();
   });
+
+  // --- EVENTOS MÓVIL (TOUCH) ---
+  enlace.addEventListener('touchstart', (e) => {
+    // No usamos preventDefault para no romper el scroll natural
+    mostrarCard(e);
+  }, {passive: true});
+});
+
+// Cerrar al tocar en cualquier otra parte (para móviles)
+document.addEventListener('touchstart', (e) => {
+  if (!e.target.classList.contains('glosario-link')) {
+    glosarioCard.style.display = 'none';
+  }
 });
