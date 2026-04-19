@@ -38,6 +38,9 @@ body {
   overflow-x: hidden;
 }
 
+#credits-btn {
+  opacity: 0.5;
+}
 /* ══════════════════════════════════════════
    BARRA DE PROGRESO
 ══════════════════════════════════════════ */
@@ -222,10 +225,11 @@ body {
   .tl-body        { overflow: hidden; }
 
   /* Info grid */
-  .info-grid                   { grid-template-columns: 1fr; gap: 20px; }
-  .info-grid img               { max-width: 100%; height: auto; }
-  .info-detail-item .text span { font-size: 0.85rem; word-break: break-word; }
-  .cita-banner                 { flex-direction: column; text-align: center; }
+  .info-grid                   { grid-template-columns: 1fr !important; gap: 20px; }
+  .info-grid img               { max-width: 100% !important; height: auto; border-radius: 8px; display: block;}
+  .info-detail-item            {display: flex; align-items: flex-start; gap: 10px;}
+  .info-detail-item .text span { font-size: 0.85rem; word-break: normal; overflow-wrap: anywhere;}
+  .cita-banner                 { flex-direction: column; align-items: center ;text-align: center; gap: 16px; }
 
   /* Contact box */
   .contact-box         { grid-template-columns: 1fr; padding: 24px 16px; gap: 20px; }
@@ -866,7 +870,7 @@ html, body {
         <span class="lbl">Fundado</span>
       </div>
       <div class="stat">
-        <span class="num" data-target="+30" data-prefix="+">30</span>
+        <span class="num" data-target="30" data-prefix="+">30</span>
         <span class="lbl">Años de historia</span>
       </div>
     </div>
@@ -945,7 +949,7 @@ html, body {
         <span class="map-card-number">04</span>
         <span class="map-card-tag">Desarrollo</span>
         <span class="map-card-icon">🟡</span>
-        <h4>Semana 1</h4>
+        <h4>Primera semana</h4>
         <p>Segmentación e inicio del viaje al útero</p>
       </div>
 
@@ -953,7 +957,7 @@ html, body {
         <span class="map-card-number">05</span>
         <span class="map-card-tag">Desarrollo</span>
         <span class="map-card-icon">🟡</span>
-        <h4>Semana 2</h4>
+        <h4>Segunda semana</h4>
         <p>Implantación en el endometrio</p>
       </div>
 
@@ -961,7 +965,7 @@ html, body {
         <span class="map-card-number">06</span>
         <span class="map-card-tag">Desarrollo</span>
         <span class="map-card-icon">🟡</span>
-        <h4>Semana 3</h4>
+        <h4>Tercera semana</h4>
         <p>Gastrulación y formación de capas germinales</p>
       </div>
 
@@ -969,7 +973,7 @@ html, body {
         <span class="map-card-number">07</span>
         <span class="map-card-tag">Desarrollo</span>
         <span class="map-card-icon">🟡</span>
-        <h4>Semanas 4 – 5</h4>
+        <h4>Cuarta y quinta semana</h4>
         <p>Organogénesis y pliegue embrionario</p>
       </div>
 
@@ -977,7 +981,7 @@ html, body {
         <span class="map-card-number">08</span>
         <span class="map-card-tag">Desarrollo</span>
         <span class="map-card-icon">🟡</span>
-        <h4>Semanas 6 – 9</h4>
+        <h4>Sexta a novena semana </h4>
         <p>Maduración y diferenciación de órganos</p>
       </div>
 
@@ -1092,6 +1096,7 @@ html, body {
 
 <footer>
   <p>© 2025 Museo de Embriología "Dra. Dora Virginia Chávez Corral" · Universidad Autónoma de Chihuahua</p>
+   <p><button id="credits-btn">Créditos</button></p> 
 </footer>
 
 <!-- ══ JAVASCRIPT ══════════════════════════════════════════════ -->
@@ -1157,6 +1162,7 @@ document.querySelectorAll('.section').forEach(el => revealObserver.observe(el));
 function animateCount(el) {
   const target   = parseInt(el.dataset.target);
   const isYear   = el.dataset.year === 'true';
+  const prefix   = el.dataset.prefix || ''; 
   const suffix   = el.dataset.suffix || '';
   const start    = isYear ? target - 30 : 0;
   const duration = 1400;
@@ -1166,7 +1172,7 @@ function animateCount(el) {
     const eased = 1 - Math.pow(1 - prog, 3); // ease-out cúbico
     el.textContent = Math.floor(start + (target - start) * eased) + suffix;
     if (prog < 1) requestAnimationFrame(ts => step(ts, startTime));
-    else el.textContent = target + suffix;
+    else el.textContent = prefix + target + suffix;
   };
 
   requestAnimationFrame(ts => step(ts, ts));
@@ -1378,5 +1384,6 @@ buildTimeline();
 heroObserver.observe(document.getElementById('inicio'));
 
 </script>
+<script src="credits.js"></script>
 </body>
 </html>
