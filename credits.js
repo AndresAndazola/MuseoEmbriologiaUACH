@@ -36,6 +36,11 @@ style.textContent = `
     position: relative;
     box-shadow: 0 24px 60px rgba(0,0,0,0.18);
     animation: credits-in 0.25s ease;
+    max-height: 85vh;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+  scrollbar-width: thin;             
+  scrollbar-color: rgba(0,0,0,0.15) transparent;
   }
   @keyframes credits-in {
     from { opacity: 0; transform: translateY(12px); }
@@ -104,8 +109,27 @@ modal.innerHTML = `
     <ul>
       <li><strong>Dra. Dora Virginia Chávez Corral</strong> — Fundadora y directora del museo</li>
       <!-- NOMBRES DE CONTRIBUYENTES.-->
-      <li>Andrés Manuel Andazola González — Programador principal</li>
-    </ul>
+      <li><strong>Andrés Manuel Andazola González</strong> — Programador principal; desarrollo full-stack e integración general de todos los módulos del equipo en la plataforma.</li>
+      <li></li>
+
+      <h4>EMBRIO-AR</h4>
+        <li><strong>Iván Chavez Armendariz</strong> — Desarrollo principal de modelaje y animación 3D en uso para realidad aumentada </li>
+        <li><strong>Hector Jair Hernandez Perez</strong> — Project Lead y guía de desarollo del proyecto EMBRIO-AR.</li>
+        <li><strong>Aldo Silva Guerrero</strong> — Implementacion de sistema trazabilidad/interacción "target" aplicado a realidad aumentada.</li>
+        <li><strong>Jesús Manuel Sagarnaga Rivera</strong> — Desarrollo principal WebAR con enfoque Full-Stack.</li>
+        <li><strong>Esau Sepulveda Guerrero</strong> — Desarrollo Front-end en optimizacion UI/UX.</li>
+        <li><strong>Kevin Rivera</strong> — Desarrollo Web de optimizacion y calidad con enfoque Full-Stack.</li>
+        <li></li>
+
+      <h4>CIRCULACIÓN PRENATAL</h4>
+      <li><strong>Diana Lorena Venegas Vazquez</strong> — Desarrollo de código e implementación de juegos didácticos interactivos enfocados en el aprendizaje dinámico del usuario.</li>
+      <li><strong>Nahomi Grisell Molina Nava</strong> — Programación, diseño y optimización de juegos didácticos interactivos para fortalecer la experiencia educativa.</li>
+      <li><strong>Dylan Daniel Rodallegas Castillo</strong> — Desarrollo de código y estructuración de la línea del tiempo informativa con contenido interactivo del proyecto.</li>
+      <li><strong>Angel Fernando Miramontes Hernández</strong> — Programación y apoyo en integración de contenido informativo dentro de la línea del tiempo interactiva.</li>
+      <li><strong>Citlaly Martínez Porras</strong> — Desarrollo de código, diseño visual e implementación de la página de bienvenida del proyecto.</li>
+      <li><strong>Dulce Valeria Ramírez Rodríguez</strong> — Revisión, validación y aportación de información relevante para el desarrollo y contenido del proyecto.</li>
+      <li><strong>Marla Rebeca Burciaga Avitia</strong> — Revisión, análisis y aportación de información para el contenido académico del proyecto.</li>
+      </ul>
   </div>
 `;
 document.body.appendChild(modal);
